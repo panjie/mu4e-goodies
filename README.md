@@ -29,6 +29,17 @@ Way to use:
 2. Press `L` to open Lync chat window with the contact
 
 
+mu4e-goodies-signature-switch
+-----------------------------
+
+This extension provide simple signature switch function for mu4e.
+
+Way to use:
+
+1. Put signatures you may want to use to `mu4e-goodies-signatures`
+2. Press `Ctrl-c s`(predefined key-binding) to switch between
+   signatures when composing emails in mu4e
+
 
 
 
