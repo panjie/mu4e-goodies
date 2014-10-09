@@ -8,6 +8,6 @@
                                  email
                                (get-text-property (point) 'email)))))
 
-(define-key mu4e-view-contacts-header-keymap "L" 'mu4e-lync-chat)
+(define-key mu4e-view-contacts-header-keymap "L" 'mu4e-goodies-lync-chat)
 
 (provide 'mu4e-goodies-lync)
