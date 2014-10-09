@@ -32,7 +32,7 @@ Way to use:
 mu4e-goodies-signature-switch
 -----------------------------
 
-This extension provide simple signature switch function for mu4e.
+This extension provides simple signature switch function for mu4e.
 
 Way to use:
 
@@ -41,14 +41,14 @@ Way to use:
    signatures when composing emails in mu4e
 
 
+mu4e-goodies-hacks
+------------------
 
+This extension provides some hacks to mu4e to change some
+default behaviors of mu4e.
 
-
-
-
-
-
-
+1. Keep the cursor on the same message after a re-run of search.
+   By default，the cursor will be moved to the first message.
 
 
 
