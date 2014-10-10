@@ -75,5 +75,21 @@
 (add-to-list 'mu4e-view-actions
              '("xsearch for sender" . mu4e-msgv-action-sender-related-mails) t)
 
+;; Lync with all recipients of this mail
+(defun mu4e-msgv-action-lync-with-all (msg)
+  "Lync with all recipients of this mail"
+  (let ((recipients '()))
+    (dolist (elt (mu4e-message-field msg :from))
+      (add-to-list 'recipients (cdr elt)))
+    (dolist (elt (mu4e-message-field msg :to))
+      (add-to-list 'recipients (cdr elt)))
+    (dolist (elt (mu4e-message-field msg :cc))
+      (add-to-list 'recipients (cdr elt)))
+    (mu4e-goodies-lync-chat recipients)))
+
+;; define 'L' as the shortcut
+(add-to-list 'mu4e-view-actions
+             '("Lync with all" . mu4e-msgv-action-lync-with-all) t)
+
 (provide 'mu4e-goodies-actions)
 
