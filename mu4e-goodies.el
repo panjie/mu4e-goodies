@@ -5,5 +5,6 @@
 (require 'mu4e-goodies-lync)
 (require 'mu4e-goodies-actions)
 (require 'mu4e-goodies-hacks)
+(require 'mu4e-goodies-keyword-alert)
 
 (provide 'mu4e-goodies)
