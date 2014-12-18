@@ -40,7 +40,7 @@ Way to use:
 2. Press `Ctrl-c s`(predefined key-binding) to switch between
    signatures when composing emails in mu4e
 
-f
+
 mu4e-goodies-hacks
 ------------------
 
@@ -67,6 +67,20 @@ Some actions maybe useful to you.
 5. *TODO* Lync with all contacts in the current email. This is
    bound to `L` in message view.
 
+mu4e-goodies-keyword-alert
+--------------------------
+
+Inform you when your mail contains some keywords (like attachment)
+while the coordinate feature is not found (like the mail doesn't get
+an attachment).
+
+By far, the extension support 2 kinds of check:
+
+1. `check-attach`: Whether or not the mail has an attachment
+2. `check-cc`: Whether or not the mail has at least one Cc recipients
+
+To use this extension, you may have to customize the variable
+`mu4e-goodies-keywords`.
 
 
 

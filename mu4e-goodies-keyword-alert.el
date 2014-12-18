@@ -37,13 +37,13 @@
 (require 'mu4e)
 
 (defvar mu4e-goodies-rule-func 
-  '(('check-attach . 'mu4e-goodies-draft-attach-p)
-    ('check-cc . 'mu4e-goodies-draft-cc-p)))
+  '((check-attach . mu4e-goodies-draft-attach-p)
+    (check-cc . mu4e-goodies-draft-cc-p)))
 
 (defvar mu4e-goodies-keywords
-  '(("[aA]ttachment" . 'check-attach)
-    ("添付" . 'check-attach)
-    ("附件" . 'check-attach))
+  '(("[aA]ttachment" . check-attach)
+    ("添付" . check-attach)
+    ("附件" . check-attach))
   "Keywords to be alerted. An alist like:
 ( (regexp-of-keywords . rules-for-keywords) ... )")
 
@@ -76,7 +76,7 @@ the pos of the keyword, nil if not found."
                   (msg))
               (while (and (not key-pos) it)
                 (setq key-pos (mu4e-goodies-search-body-subject (car it)))
-                (unless (funcall (cdr (assoc (cdr it) mu4e-goodies-rule-func)))
+                (when (funcall (cdr (assoc (cdr it) mu4e-goodies-rule-func)))
                     (setq key-pos nil)
                     (setq it (car list)
                           list (cdr list))))
