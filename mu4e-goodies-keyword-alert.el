@@ -51,7 +51,7 @@
   "Check if current email draft has at least one attachment"
   (save-excursion
     (goto-char (point-min))
-    (re-search-forward "\<#part .* filename=.*" (point-max) t)))
+    (re-search-forward "\<#part .*filename=.*" (point-max) t)))
 
 (defun mu4e-goodies-draft-cc-p ()
   "Check if current email draft has cc field"
