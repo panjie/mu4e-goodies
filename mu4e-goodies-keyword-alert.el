@@ -30,9 +30,11 @@
 ;; (("[aA]ttachment" . 'check-attach))
 ;;
 ;; TODO:
-;; - highlight the keywords
-;; - for check-attach, if the keywords are in quotations, the alert will
+;; - Highlight the keywords
+;; - For check-attach, if the keywords are in quotations, the alert will
 ;;   not be emitted
+;; - Add check-domain, which will use blacklist/whitelist to check if the
+;;   domain of email adresses are legal
 ;;
 
 (require 'mu4e)
