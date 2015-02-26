@@ -29,6 +29,11 @@
 ;; Example of mu4e-goodies-keywords:
 ;; (("[aA]ttachment" . 'check-attach))
 ;;
+;; TODO:
+;; - highlight the keywords
+;; - for check-attach, if the keywords are in quotations, the alert will
+;;   not be emitted
+;;
 
 (require 'mu4e)
 
