@@ -64,5 +64,12 @@ if signame is not given"
 
 (define-key mu4e-compose-mode-map "\C-cs" 'mu4e-goodies-switch-signature)
 
+;; Add a menu-item in Message menu to switch signature
+(when (functionp (lookup-key message-mode-map [menu-bar Message Insert\ Signature]))
+  (define-key-after message-mode-map [menu-bar Message Switch\ Signature]
+    '("Switch Signature" . mu4e-goodies-switch-signature) 'Insert\ Signature))
+
+
+
 
 (provide 'mu4e-goodies-signature-switch)
