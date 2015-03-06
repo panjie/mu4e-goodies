@@ -12,6 +12,8 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
+(require 'mu4e)
+
 ;; 
 ;; Change the behavior of rerun-search so that after rerun,
 ;; the pos will be positioned to the message before rerun is
@@ -22,8 +24,6 @@
 ;;
 ;; TODO: the current implementation is very ugly and the use of
 ;; defadvice will be considered in the future
-
-(require 'mu4e)
 
 (defvar mu4e-headers-last-docid nil "docid when running last find")
 (defvar mu4e-headers-on-rerun nil "if it is in rerun")
@@ -58,5 +58,14 @@ NOTE: changed by panjie@gmail.com"
       (when (mu4e~headers-goto-docid mu4e-headers-last-docid)
         (hl-line-highlight))
       (setq mu4e-headers-on-rerun nil))))
+
+;;
+;; Add the following menu item to the Message menu:
+;; - Insert the captured message
+;; 
+(when (functionp (lookup-key message-mode-map [menu-bar Message Insert\ File\ Marked...]))
+  (define-key-after message-mode-map [menu-bar Message Insert\ Caputured\ Message] 
+    '("Insert Captured Message" . mu4e-compose-attach-captured-message) 'Insert\ File\ Marked...))
+
 
 (provide 'mu4e-goodies-hacks)
