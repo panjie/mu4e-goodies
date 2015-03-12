@@ -90,20 +90,41 @@
              '("xsearch for sender" . mu4e-msgv-action-sender-related-mails) t)
 
 ;; Lync with all recipients of this mail
+;; TODO: not works at all
 (defun mu4e-msgv-action-lync-with-all (msg)
   "Lync with all recipients of this mail"
-  (let ((recipients '()))
-    (dolist (elt (mu4e-message-field msg :from))
-      (add-to-list 'recipients (cdr elt)))
-    (dolist (elt (mu4e-message-field msg :to))
-      (add-to-list 'recipients (cdr elt)))
-    (dolist (elt (mu4e-message-field msg :cc))
-      (add-to-list 'recipients (cdr elt)))
-    (mu4e-goodies-lync-chat recipients)))
+  (mu4e-goodies-lync-chat (cdar (mu4e-message-field msg :from))))
+  
+  ;; (let ((recipients '()))
+  ;;   (dolist (elt (mu4e-message-field msg :from))
+  ;;     (add-to-list 'recipients (cdr elt)))
+  ;;   (dolist (elt (mu4e-message-field msg :to))
+  ;;     (add-to-list 'recipients (cdr elt)))
+  ;;   (dolist (elt (mu4e-message-field msg :cc))
+  ;;     (add-to-list 'recipients (cdr elt)))
+  ;;   (mu4e-goodies-lync-chat recipients)))
 
 ;; define 'L' as the shortcut
 (add-to-list 'mu4e-view-actions
              '("Lync with all" . mu4e-msgv-action-lync-with-all) t)
+
+;; Create a todo entry in the specified subtree of specified org file
+(defcustom mu4e-goodies-todo-file nil
+  "TODO org file where the mail-based todo item will be inserted"
+  :group 'mu4e-goodies)
+
+(defcustom mu4e-goodies-todo-parent-entry nil
+  "The subtree entry where the mail-based todo item will be inserted"
+  :group 'mu4e-goodies)
+
+(defun mu4e-goodies-action-make-todo (msg)
+  "Make a org todo item based on current mail"
+  (let ((title (mu4e-message-field msg :subject))
+        (body))
+    )
+               
+  )
+  
 
 (provide 'mu4e-goodies-actions)
 
