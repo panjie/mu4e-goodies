@@ -14,6 +14,10 @@
 
 (require 'mu4e)
 
+(defgroup mu4e-goodies nil
+  "Settings for mu4e-goodies"
+  :group 'mu4e)
+
 (require 'mu4e-goodies-indicators)
 (require 'mu4e-goodies-signature-switch)
 (require 'mu4e-goodies-lync)
