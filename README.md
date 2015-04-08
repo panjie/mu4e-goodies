@@ -56,16 +56,18 @@ mu4e-goodies-actions
 
 Some actions maybe useful to you.
 
-1. Show the whole thread of current email. This is bound to `o`
-   in headers and message view by default.
-2. View the current email's html part in browser. This is bound
-   to `V` in message view by default.
-3. View the current email's html part by mu4e-html2text-command.
-   This is bound to `t` in message view.
-4. Quick search all emails sent by current email's sender. This
-   is bound to `x` in message view.
-5. *TODO* Lync with all contacts in the current email. This is
-   bound to `L` in message view.
+1. Show the whole thread of current email. This is bound to `o` in
+   headers and message view by default.
+2. View the current email's html part in browser. This is bound to `V`
+   in message view by default.
+3. View the current email's html part by mu4e-html2text-command. This
+   is bound to `t` in message view.
+4. Quick search all emails sent by current email's sender. This is
+   bound to `x` in message view.
+5. *TODO* Lync with all contacts in the current email. This is bound
+   to `L` in message view.
+6. Create org todo/meeting from current message. This is bounded to
+   `n/m` in message view
 
 mu4e-goodies-keyword-alert
 --------------------------
