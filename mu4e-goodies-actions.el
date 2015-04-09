@@ -210,8 +210,6 @@ subtree of file's entry with the content."
     
     ;; prompt for the time-stamp
     (setq ts (with-temp-buffer (org-time-stamp 1)
-                               (insert "--")
-                               (org-time-stamp 1)
                                (buffer-string)))
     ;; remember as recent file
     (when (mu4e-goodies-insert-item nil file entry title ts content)
