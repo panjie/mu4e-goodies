@@ -158,8 +158,9 @@ subtree of file's entry with the content."
           (org-insert-subheading 1))
         (insert title)
         (when ts
-          (if todop (progn (org-deadline 1 ts)
-                           (goto-char (line-end-position 2)))
+          (if todop
+              (progn (org-deadline 1 (replace-regexp-in-string "<\\(.+-.+-[^ ]+\\) .+>" "\\1" ts))
+                     (goto-char (line-end-position 2)))
             (insert ts)))
         (insert "\n")
         (when content
@@ -169,53 +170,38 @@ subtree of file's entry with the content."
         ;; add t here because insert always return nil
         t))))
 
+;; TODO:
+;; - add multi-language support
+;; - auto save/revert if the org file is already opened
+(defun mu4e-goodies-add-org-item (&optional istodo item-title item-link)
+  "Add org meeting/todo anywhere you want from minibuffer"
+  (interactive)
+  (let ((title item-title)
+        (link item-link)
+        file entry body ts)
+    (setq title (read-string "Title: " title))
+    (unless (setq file (or mu4e-goodies-org-file mu4e-goodies-recent-org-file))
+          (setq file (read-file-name "Org file name: " nil nil nil (car org-agenda-files))))
+    (unless (setq entry (if istodo
+                            (or mu4e-goodies-todo-parent-entry
+                                mu4e-goodies-recent-todo-parent-entry)
+                          (or mu4e-goodies-meeting-parent-entry 
+                              mu4e-goodies-recent-meeting-parent-entry)))
+      (setq entry (read-string "Parent heading: " (if istodo "Tasks" "Meetings") nil nil)))
+    (setq ts (with-temp-buffer (org-time-stamp 1)(buffer-string)))
+    ;; remember as recent file
+    (when (mu4e-goodies-insert-item istodo file entry title ts link)
+      (setq mu4e-goodies-recent-org-file file
+            mu4e-goodies-recent-meeting-parent-entry entry)
+      (message "%s [%s] created successfully" (if istodo "Todo" "Meeting") title))))
+
 (defun mu4e-goodies-action-make-todo (msg)
   "Make an org todo item based on current mail"
-  (let ((title (mu4e-message-field msg :subject))
-        file entry body link deadline content)
-    ;; prompt for the title
-    (setq title (read-string "Title: " title nil nil))
-    (unless (setq file (or mu4e-goodies-org-file mu4e-goodies-recent-org-file))
-      ;; prompt for the file name
-      (setq file (read-file-name "Org file name: " nil nil nil (car org-agenda-files))))
-    (unless (setq entry (or mu4e-goodies-todo-parent-entry 
-                            mu4e-goodies-recent-todo-parent-entry))
-      ;; prompt for the entry
-      (setq entry (read-string "Parent heading: " "Tasks" nil nil)))
-    ;; TODO: make an org-link to thie file as the content
-    
-    ;; prompt for the deadline
-    (setq deadline (replace-regexp-in-string "<\\(.+-.+-[^ ]+\\) .+>" "\\1"
-                                             (with-temp-buffer (org-time-stamp nil))))
-    ;; remember as recent file
-    (when (mu4e-goodies-insert-item t file entry title deadline content)
-      (message "Todo [%s] created successfully" title)
-      (setq mu4e-goodies-recent-org-file file
-            mu4e-goodies-recent-todo-parent-entry entry))))
+  (mu4e-goodies-add-org-item t (mu4e-message-field msg :subject)))
 
 (defun mu4e-goodies-action-make-meeting (msg)
   "Make an org meeting item based on current mail"
-  (let ((title (mu4e-message-field msg :subject))
-        file entry body link ts content)
-    ;; prompt for the title
-    (setq title (read-string "Title: " title nil nil))
-    (unless (setq file (or mu4e-goodies-org-file mu4e-goodies-recent-org-file))
-      ;; prompt for the file name
-      (setq file (read-file-name "Org file name: " nil nil nil (car org-agenda-files))))
-    (unless (setq entry (or mu4e-goodies-meeting-parent-entry 
-                            mu4e-goodies-recent-meeting-parent-entry))
-      ;; prompt for the entry
-      (setq entry (read-string "Parent heading: " "Meetings" nil nil)))
-    ;; TODO: make an org-link to thie message as the content
-    
-    ;; prompt for the time-stamp
-    (setq ts (with-temp-buffer (org-time-stamp 1)
-                               (buffer-string)))
-    ;; remember as recent file
-    (when (mu4e-goodies-insert-item nil file entry title ts content)
-      (message "Meeting [%s] created successfully" title)
-      (setq mu4e-goodies-recent-org-file file
-            mu4e-goodies-recent-meeting-parent-entry entry))))
+  (mu4e-goodies-add-org-item nil (mu4e-message-field msg :subject)))
 
 (add-to-list 'mu4e-view-actions
              '("new todo from this mail" . mu4e-goodies-action-make-todo) t)
