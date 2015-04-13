@@ -179,7 +179,8 @@ subtree of file's entry with the content."
   (let ((title item-title)
         (link item-link)
         file entry body ts)
-    (setq title (read-string "Title: " title))
+    (setq title (read-string (format "%s title: " (if istodo "Task" "Meeting"))
+                             title))
     (unless (setq file (or mu4e-goodies-org-file mu4e-goodies-recent-org-file))
           (setq file (read-file-name "Org file name: " nil nil nil (car org-agenda-files))))
     (unless (setq entry (if istodo
