@@ -90,19 +90,17 @@
              '("xsearch for sender" . mu4e-msgv-action-sender-related-mails) t)
 
 ;; Lync with all recipients of this mail
-;; TODO: not works at all
 (defun mu4e-msgv-action-lync-with-all (msg)
   "Lync with all recipients of this mail"
-  (mu4e-goodies-lync-chat (cdar (mu4e-message-field msg :from))))
   
-  ;; (let ((recipients '()))
-  ;;   (dolist (elt (mu4e-message-field msg :from))
-  ;;     (add-to-list 'recipients (cdr elt)))
-  ;;   (dolist (elt (mu4e-message-field msg :to))
-  ;;     (add-to-list 'recipients (cdr elt)))
-  ;;   (dolist (elt (mu4e-message-field msg :cc))
-  ;;     (add-to-list 'recipients (cdr elt)))
-  ;;   (mu4e-goodies-lync-chat recipients)))
+  (let ((recipients '()))
+    (dolist (elt (mu4e-message-field msg :from))
+      (add-to-list 'recipients (cdr elt)))
+    (dolist (elt (mu4e-message-field msg :to))
+      (add-to-list 'recipients (cdr elt)))
+    (dolist (elt (mu4e-message-field msg :cc))
+      (add-to-list 'recipients (cdr elt)))
+    (mu4e-goodies-lync-chat recipients)))
 
 ;; define 'L' as the shortcut
 (add-to-list 'mu4e-view-actions
