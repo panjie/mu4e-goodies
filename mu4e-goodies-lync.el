@@ -15,21 +15,50 @@
 (require 'mu4e)
 (require 'browse-url)
 
+
 (defun mu4e-goodies-lync-chat (&optional emails)
-  "Lync with the email address at point if parameter email is not given"
+  "Lync with the email address at point if parameter email is not given.
+
+Note:
+- It will only work under windows/cygwin
+- If used under cygwin, you should prepare a script named \"lya.bat\" like the following:
+  -----------------------------------------
+  @echo off
+  setlocal enableDelayedExpansion
+
+  set SIPS=
+  :LOOP
+        if [%1] == [] goto END
+        set \"TEMPSIP=<sip:%1>\"
+        set SIPS=!SIPS!!TEMPSIP!
+        shift
+        goto LOOP
+  :END
+
+  IF NOT !SIPS! == \"\" start im:!SIPS!
+  ----------------------------------------"
   (interactive)
-  (browse-url (if (and (listp emails) (> (length emails) 0))
-                  ;; an email list
-                  (let ((uri "im:"))
-                    (dolist (email emails)
-                      (unless (string= email user-mail-address) 
-                        (setq uri (concat uri "<sip:" email ">"))))
-                    (mu4e-message "Lync with %s" uri)
-                    uri)
-                (if (stringp emails)
-                    ;; a single email
-                    (concat "sip:" emails)
-                  (concat "sip:" (get-text-property (point) 'email))))))
+  (if (and (listp emails) (> (length emails) 0))
+      ;; an email list
+      (if (eq system-type 'windows-nt)
+          (browse-url (let ((uri "im:"))
+                        (dolist (email emails)
+                          (unless (string= email user-mail-address) 
+                            (setq uri (concat uri "<sip:" email ">"))))
+                        (mu4e-message "Lync with %s" uri)
+                        uri))
+        (when (eq system-type 'cygwin)
+          (let ((str ""))
+            (dolist (email emails)
+              (unless (string= email user-mail-address)
+                (setq str (concat str " " email))))
+            (shell-command (concat "lya.bat " str)))))
+    (if (stringp emails)
+        ;; a single email
+        (browse-url (concat "sip:" emails))
+      ;; get email address from point
+      (browse-url (concat "sip:" (get-text-property (point) 'email))))))
+
 
 (define-key mu4e-view-contacts-header-keymap "L" 'mu4e-goodies-lync-chat)
 
