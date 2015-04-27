@@ -162,7 +162,7 @@ subtree of file's entry with the content."
             (insert ts)))
         (insert "\n")
         (when content
-          ;;TODO: indent the content
+          (indent-according-to-mode)
           (insert content)
           (insert "\n"))
         ;; add t here because insert always return nil
@@ -194,13 +194,51 @@ subtree of file's entry with the content."
             mu4e-goodies-recent-meeting-parent-entry entry)
       (message "%s [%s] created successfully" (if istodo "Todo" "Meeting") title))))
 
+(defun mu4e-goodies-create-msg-link (msg)
+  "Create a org-link to msg"
+  (let* ((msgid (or (plist-get msg :message-id) "<none>"))
+         (from  (or (plist-get msg :from) '(("none" . "none"))))
+         (fromname (car (car from)))
+         (fromaddress (cdr (car from)))
+         (to  (or (plist-get msg :to) '(("none" . "none"))))
+         (toname (car (car to)))
+         (toaddress (cdr (car to)))
+         (fromto (if (mu4e-user-mail-address-p fromaddress)
+                     (format "to %s <%s>" toname toaddress)
+                   (format "from %s <%s>" fromname fromaddress)))
+         (date (plist-get msg :date))
+         (date-ts (format-time-string (org-time-stamp-format t) date))
+         (date-ts-ia (format-time-string (org-time-stamp-format t t) date))
+         (subject  (or (plist-get msg :subject) "<none>"))
+         link)
+    (org-store-link-props :type "mu4e" :link link
+                          :message-id msgid)
+    (setq link (concat "mu4e:msgid:" msgid))
+    (org-add-link-props :link link
+                        :to (format "%s <%s>" toname toaddress)
+                        :toname toname
+                        :toaddress toaddress
+                        :from (format "%s <%s>" fromname fromaddress)
+                        :fromname fromname
+                        :fromaddress fromaddress
+                        :fromto fromto
+                        :date date-ts-ia
+                        :date-timestamp date-ts
+                        :date-timestamp-inactive date-ts-ia
+                        :subject subject
+                        :description (funcall org-mu4e-link-desc-func msg))
+    (concat "[[" link "][" (funcall org-mu4e-link-desc-func msg) "]]")))
+
 (defun mu4e-goodies-action-make-todo (msg)
   "Make an org todo item based on current mail"
-  (mu4e-goodies-add-org-item t (mu4e-message-field msg :subject)))
+  (mu4e-goodies-add-org-item t (mu4e-message-field msg :subject)
+                             (mu4e-goodies-create-msg-link msg)))
 
 (defun mu4e-goodies-action-make-meeting (msg)
   "Make an org meeting item based on current mail"
-  (mu4e-goodies-add-org-item nil (mu4e-message-field msg :subject)))
+  (mu4e-goodies-add-org-item nil (mu4e-message-field msg :subject)
+                             (mu4e-goodies-create-msg-link msg)))
+
 
 (add-to-list 'mu4e-view-actions
              '("new todo from this mail" . mu4e-goodies-action-make-todo) t)
