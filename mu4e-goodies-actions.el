@@ -89,7 +89,7 @@
 (add-to-list 'mu4e-view-actions
              '("xsearch for sender" . mu4e-msgv-action-sender-related-mails) t)
 
-(when (eq system-type 'windows-nt)
+(when (or (eq system-type 'windows-nt) (eq system-type 'cygwin))
   ;; Lync with all recipients of this mail
   (defun mu4e-msgv-action-lync-with-all (msg)
     "Lync with all recipients of this mail"
