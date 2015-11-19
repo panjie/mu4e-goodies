@@ -27,9 +27,9 @@
     (mu4e-headers-search (format "msgid:%s" msgid))))
 
 (add-to-list 'mu4e-headers-actions
-             '("open thread of the message at point" . mu4e-headerv-action-show-cur-thread) t)
+             '("open thread" . mu4e-headerv-action-show-cur-thread) t)
 (add-to-list 'mu4e-view-actions
-             '("open thread of the message at point" . mu4e-headerv-action-show-cur-thread) t)
+             '("open thread" . mu4e-headerv-action-show-cur-thread) t)
 
 ;; show current message's html part in browser
 (defun mu4e-msgv-action-view-in-browser (msg)
