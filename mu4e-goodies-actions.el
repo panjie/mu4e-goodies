@@ -77,7 +77,7 @@
           (goto-char (point-min)))))))
 
 (add-to-list 'mu4e-view-actions
-             '("toggle to HTML" . mu4e-msgv-action-view-in-html) t)
+             '("html msg" . mu4e-msgv-action-view-in-html) t)
 
 ;; view the mails sent by the sender of current mail
 (defun mu4e-msgv-action-sender-related-mails (msg)
@@ -243,9 +243,9 @@ subtree of file's entry with the content."
 
 
 (add-to-list 'mu4e-view-actions
-             '("new todo from this mail" . mu4e-goodies-action-make-todo) t)
+             '("todo" . mu4e-goodies-action-make-todo) t)
 (add-to-list 'mu4e-view-actions
-             '("meeting from this mail" . mu4e-goodies-action-make-meeting) t)
+             '("meeting" . mu4e-goodies-action-make-meeting) t)
 
 
 (provide 'mu4e-goodies-actions)
