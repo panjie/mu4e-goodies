@@ -241,11 +241,19 @@ subtree of file's entry with the content."
   (mu4e-goodies-add-org-item nil (mu4e-message-field msg :subject)
                              (mu4e-goodies-create-msg-link msg)))
 
+(defun mu4e-goodies-action-copy-org-link (msg)
+  "Copy org link of the message to clipboard"
+  (with-temp-buffer
+    (insert (mu4e-goodies-create-msg-link msg))
+    (clipboard-kill-ring-save (point-min) (point-max))))
+
 
 (add-to-list 'mu4e-view-actions
              '("todo" . mu4e-goodies-action-make-todo) t)
 (add-to-list 'mu4e-view-actions
              '("meeting" . mu4e-goodies-action-make-meeting) t)
+(add-to-list 'mu4e-view-actions
+             '("link of org" . mu4e-goodies-action-copy-org-link) t)
 
 
 (provide 'mu4e-goodies-actions)
