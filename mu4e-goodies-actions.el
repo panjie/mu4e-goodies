@@ -17,20 +17,6 @@
 ;; Actions
 ;;--------------------------------------------------
 
-;; show the thread of current message
-(defun mu4e-headerv-action-show-cur-thread (msg)
-  "Only view the thread of current mail"
-  (let ((msgid (mu4e-msg-field msg :message-id)))
-    (setq
-     mu4e-headers-show-threads t
-     mu4e-headers-include-related t)
-    (mu4e-headers-search (format "msgid:%s" msgid))))
-
-(add-to-list 'mu4e-headers-actions
-             '("open thread" . mu4e-headerv-action-show-cur-thread) t)
-(add-to-list 'mu4e-view-actions
-             '("open thread" . mu4e-headerv-action-show-cur-thread) t)
-
 ;; show current message's html part in browser
 (defun mu4e-msgv-action-view-in-browser (msg)
   "View the body of the message in a web browser."
@@ -253,7 +239,7 @@ subtree of file's entry with the content."
 (add-to-list 'mu4e-view-actions
              '("meeting" . mu4e-goodies-action-make-meeting) t)
 (add-to-list 'mu4e-view-actions
-             '("link of org" . mu4e-goodies-action-copy-org-link) t)
+             '("org link" . mu4e-goodies-action-copy-org-link) t)
 
 
 (provide 'mu4e-goodies-actions)
