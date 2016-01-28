@@ -35,35 +35,6 @@
 (add-to-list 'mu4e-view-actions
              '("View in browser" . mu4e-msgv-action-view-in-browser) t)
 
-;; view current message's html part(translated by mu4e-html2text-command)
-(defun mu4e-msgv-action-view-in-html (msg)
-  "Display the message MSG in a new buffer"
-  (let ((buf (get-buffer-create mu4e~view-buffer-name))
-        (pref mu4e-view-prefer-html))
-    ;; note: mu4e~view-mark-as-read will pseudo-recursively
-    ;; call mu4e-view again by triggering mu4e~view again as
-    ;; it marks the message as read
-    (with-current-buffer buf
-      ;;(switch-to-buffer buf)
-      (setq mu4e~view-msg msg)
-      (when (not (mu4e~view-mark-as-read msg))
-        (let ((inhibit-read-only t))
-          (erase-buffer)
-          (mu4e~delete-all-overlays)
-          (setq mu4e-view-prefer-html t)
-          (insert (mu4e-view-message-text msg))
-          (setq mu4e-view-prefer-html pref)
-          (goto-char (point-min))
-          (mu4e~fontify-cited)
-          (mu4e~fontify-signature)
-          (mu4e~view-make-urls-clickable)	
-          (mu4e~view-show-images-maybe msg)            
-          ;;(when embedded (local-set-key "q" 'kill-buffer-and-window))
-          (mu4e-view-mode)
-          (goto-char (point-min)))))))
-
-(add-to-list 'mu4e-view-actions
-             '("html msg" . mu4e-msgv-action-view-in-html) t)
 
 ;; view the mails sent by the sender of current mail
 (defun mu4e-msgv-action-sender-related-mails (msg)
