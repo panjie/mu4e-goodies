@@ -40,13 +40,16 @@ if signame is not given"
             (idx 0))
         (unless (and signame (setq next-sig (cdr (assoc signame mu4e-goodies-signatures))))
           (dolist (elt mu4e-goodies-signatures next-sig)
-            (setq idx (+ 1 idx))
+            (setq idx (if (= (+ 1 idx) (length mu4e-goodies-signatures)) 0 (+ 1 idx)))
             (when (string-equal (cdr elt) sig)
+              (setq signame (car (nth idx mu4e-goodies-signatures)))
               (setq next-sig (cdr (nth idx mu4e-goodies-signatures))))))
-          (unless next-sig
-            (setq next-sig (cdr (car mu4e-goodies-signatures))))
-          (delete-region (point) (point-max))
-          (insert next-sig)))))
+        (unless next-sig
+          (setq signame "mu4e's default signature")
+          (setq next-sig (cdr (car mu4e-goodies-signatures))))
+        (delete-region (point) (point-max))
+        (message "signature switched to %s" signame)
+        (insert next-sig)))))
 
 (defun mu4e-goodies-switch-signature-by-rule ()
   "Switch the draft's signature according to the rules defined in
