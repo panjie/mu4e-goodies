@@ -25,7 +25,7 @@
 
 (defvar mu4e-goodies-signature-switch-rules nil
   "Rules of signature swith, which is an alist like:
-((\"rules-of-regexp\" . \"sig name\") ...)
+((\"regexp-to-match-address\" . \"sig name\") ...)
 The rules will only apply to the first recipient's address")
 
 (defun mu4e-goodies-switch-signature (&optional signame)
@@ -54,17 +54,18 @@ if signame is not given"
 (defun mu4e-goodies-switch-signature-by-rule ()
   "Switch the draft's signature according to the rules defined in
   mu4e-goodies-signature-switch-rules"
-  (let ((msg mu4e-compose-parent-message)
-        (rules mu4e-goodies-signature-switch-rules))
-    (while (and rules 
-                (not (mu4e-message-contact-field-matches msg
-                                                         :from
-                                                         (caar rules))))
-      (setq rules (cdr rules)))
-    (when rules
-      (mu4e-goodies-switch-signature (cdar rules)))))
+  (when mu4e-goodies-signature-switch-rules
+    (let ((msg mu4e-compose-parent-message)
+          (rules mu4e-goodies-signature-switch-rules))
+      (while (and rules 
+                  (not (mu4e-message-contact-field-matches msg
+                                                           :from
+                                                           (caar rules))))
+        (setq rules (cdr rules)))
+      (when rules
+        (mu4e-goodies-switch-signature (cdar rules))))))
 
-
+(add-hook 'mu4e-compose-mode-hook 'mu4e-goodies-switch-signature-by-rule)
 (define-key mu4e-compose-mode-map "\C-cs" 'mu4e-goodies-switch-signature)
 
 ;; Add a menu-item in Message menu to switch signature
