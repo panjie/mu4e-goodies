@@ -68,4 +68,40 @@ NOTE: changed by panjie@gmail.com"
     '("Insert Captured Message" . mu4e-compose-attach-captured-message) 'Insert\ File\ Marked...))
 
 
+;;
+;; Allow a mu4e-view buffer detached from mu4e-header so that it will be
+;; retained in a seperated window or frame.
+;;
+(defun mu4e-goodies-detach-msg-view (&optional towin focusnew)  
+  "Detach the current mu4e-view buffer from header to a new
+frame or window.
+
+If towin is t, the detached message view will be presented in a
+splitted window. Otherwise it will be presented in a new frame.
+
+If focusnew is t, the new window/frame will be focused"
+  (interactive)
+  (let* ((buf (current-buffer))
+         (frm (selected-frame))
+         (new-win nil)
+         (new-frm nil))
+    (when (string= (buffer-name buf) mu4e~view-buffer-name)
+      ;; rename it so that it will not be found by mu4e-view
+      (rename-buffer (concat "*mu4e-view*" (mu4e-msg-field mu4e~view-msg :subject) "*") t)
+      (setq mu4e~view-buffer nil)
+      (if towin
+          (setq new-win (split-window-below))
+        (progn
+          (setq new-frm (make-frame))
+          (select-frame-set-input-focus frm)))
+      (mu4e-view mu4e~view-msg mu4e~view-headers-buffer)
+      (when focusnew
+        (if towin
+            (select-window new-win)
+          (select-frame-set-input-focus new-frm))))))
+
+(define-key 'mu4e-view-mode-map "\'" 'mu4e-goodies-detach-msg-view)
+(define-key 'mu4e-view-mode-map "\"" (lambda () (interactive) (mu4e-goodies-detach-msg-view t nil)))
+
+
 (provide 'mu4e-goodies-hacks)
