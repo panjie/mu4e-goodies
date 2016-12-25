@@ -49,6 +49,9 @@ default behaviors of mu4e.
 
 1. Keep the cursor on the same message after a re-run of search.
    By default，the cursor will be moved to the first message.
+2. Allow a mu4e-view buffer detached from mu4e-header so that it will be
+   retained in a seperated window or frame. To use this function, press
+   `'` under mu4e-view mode.
 
 
 mu4e-goodies-actions
