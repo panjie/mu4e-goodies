@@ -54,19 +54,22 @@ if signame is not given"
 (defun mu4e-goodies-switch-signature-by-rule ()
   "Switch the draft's signature according to the rules defined in
   mu4e-goodies-signature-switch-rules"
-  (when (and mu4e-goodies-signature-switch-rules
-             mu4e-compose-parent-message)
-    (let ((msg mu4e-compose-parent-message)
+  (when mu4e-goodies-signature-switch-rules
+    (let ((addr (if mu4e-compose-parent-message
+                         (mu4e-message-field mu4e-compose-parent-message :from)
+                       (message-field-value "To")))
           (rules mu4e-goodies-signature-switch-rules))
-      (while (and rules 
-                  (not (mu4e-message-contact-field-matches msg
-                                                           :from
-                                                           (caar rules))))
+      (setq addr (if (listp addr)       ;; already parsed by mu4e
+                     (cdr (car addr))
+                   (if (stringp addr)   ;; raw address like: "ABC <abc@abc.com>"
+                       (car (mail-header-parse-address addr)))))
+      (while (and rules (not (string-match-p (caar rules) addr)))
         (setq rules (cdr rules)))
       (when rules
         (mu4e-goodies-switch-signature (cdar rules))))))
 
 (add-hook 'mu4e-compose-mode-hook 'mu4e-goodies-switch-signature-by-rule)
+(add-hook 'message-send-hook 'mu4e-goodies-switch-signature-by-rule)
 (define-key mu4e-compose-mode-map "\C-cs" 'mu4e-goodies-switch-signature)
 
 ;; Add a menu-item in Message menu to switch signature
