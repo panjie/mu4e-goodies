@@ -54,7 +54,8 @@ if signame is not given"
 (defun mu4e-goodies-switch-signature-by-rule ()
   "Switch the draft's signature according to the rules defined in
   mu4e-goodies-signature-switch-rules"
-  (when mu4e-goodies-signature-switch-rules
+  (when (and mu4e-goodies-signature-switch-rules
+             mu4e-compose-parent-message)
     (let ((msg mu4e-compose-parent-message)
           (rules mu4e-goodies-signature-switch-rules))
       (while (and rules 
