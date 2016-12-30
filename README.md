@@ -53,7 +53,7 @@ default behaviors of mu4e.
    retained in a seperated window or frame. To use this function, press
    `'` under mu4e-view mode.
 3. *TODO* Remove duplicated signatures and mail headers which are very common
-   in mails sent by Outlook.
+   in mails sent by Outlook before sent.
 
 
 mu4e-goodies-actions
