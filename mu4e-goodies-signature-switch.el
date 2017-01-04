@@ -68,7 +68,6 @@ if signame is not given"
       (when rules
         (mu4e-goodies-switch-signature (cdar rules))))))
 
-(add-hook 'mu4e-compose-mode-hook 'mu4e-goodies-switch-signature-by-rule)
 (add-hook 'message-send-hook 'mu4e-goodies-switch-signature-by-rule)
 (define-key mu4e-compose-mode-map "\C-cs" 'mu4e-goodies-switch-signature)
 
