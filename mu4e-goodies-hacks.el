@@ -58,5 +58,20 @@ If focusnew is t, the new window/frame will be focused"
 (define-key 'mu4e-view-mode-map "\'" 'mu4e-goodies-detach-msg-view)
 (define-key 'mu4e-view-mode-map "\"" (lambda () (interactive) (mu4e-goodies-detach-msg-view t nil)))
 
+;;
+;; Always put attachments to the bottom of email
+;;
+(defun mml-attach-file--go-to-eob (orig-fun &rest args)
+  "Go to the end of buffer before attaching files."
+  (save-excursion
+    (save-restriction
+      (widen)
+      (goto-char (point-max))
+      (apply orig-fun args))))
+
+(advice-add 'mml-attach-file :around #'mml-attach-file--go-to-eob)
+(advice-add 'mml-dnd-attach-file :around #'mml-attach-file--go-to-eob)
+
+
 
 (provide 'mu4e-goodies-hacks)
