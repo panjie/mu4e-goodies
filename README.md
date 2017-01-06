@@ -47,13 +47,13 @@ mu4e-goodies-hacks
 This extension provides some hacks to mu4e to change some
 default behaviors of mu4e.
 
-1. Keep the cursor on the same message after a re-run of search.
-   By default，the cursor will be moved to the first message.
-2. Allow a mu4e-view buffer detached from mu4e-header so that it will be
+1. Allow a mu4e-view buffer detached from mu4e-header so that it will be
    retained in a seperated window or frame. To use this function, press
    `'` under mu4e-view mode.
-3. *TODO* Remove duplicated signatures and mail headers which are very common
+2. Always put attachements to the bottom of mail
+2. *TODO* Remove duplicated signatures and mail headers which are very common
    in mails sent by Outlook before sent.
+
 
 
 mu4e-goodies-actions
