@@ -60,6 +60,7 @@ If focusnew is t, the new window/frame will be focused"
 
 ;;
 ;; Always put attachments to the bottom of email
+;; http://mbork.pl/2015-11-28_Fixing_mml-attach-file_using_advice
 ;;
 (defun mml-attach-file--go-to-eob (orig-fun &rest args)
   "Go to the end of buffer before attaching files."
