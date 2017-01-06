@@ -51,7 +51,8 @@ default behaviors of mu4e.
    retained in a seperated window or frame. To use this function, press
    `'` under mu4e-view mode.
 2. Always put attachements to the bottom of mail
-2. *TODO* Remove duplicated signatures and mail headers which are very common
+3. Quickly add last query to bookmarks
+4. *TODO* Remove duplicated signatures and mail headers which are very common
    in mails sent by Outlook before sent.
 
 
