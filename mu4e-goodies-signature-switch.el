@@ -35,9 +35,13 @@ if signame is not given"
   (save-excursion
     (when (> (length mu4e-goodies-signatures) 0)
       (message-goto-signature)
-      (let ((sig (buffer-substring (point) (point-max)))
-            (next-sig nil)
-            (idx 0))
+      (let* ((sig-start (point))
+             (sig-end (if (re-search-forward "\<#part" nil t)  ;; take MIME lines into consideration
+                          (1- (match-beginning 0))
+                        (point-max)))
+             (sig (buffer-substring sig-start sig-end))
+             (next-sig nil)
+             (idx 0))
         (unless (and signame (setq next-sig (cdr (assoc signame mu4e-goodies-signatures))))
           (dolist (elt mu4e-goodies-signatures next-sig)
             (setq idx (if (= (+ 1 idx) (length mu4e-goodies-signatures)) 0 (+ 1 idx)))
@@ -47,8 +51,9 @@ if signame is not given"
         (unless next-sig
           (setq signame "mu4e's default signature")
           (setq next-sig (cdr (car mu4e-goodies-signatures))))
-        (delete-region (point) (point-max))
+        (delete-region sig-start sig-end)
         (message "signature switched to %s" signame)
+        (goto-char sig-start)
         (insert next-sig)))))
 
 (defun mu4e-goodies-switch-signature-by-rule ()
