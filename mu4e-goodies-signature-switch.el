@@ -42,6 +42,14 @@ if signame is not given"
              (sig (buffer-substring sig-start sig-end))
              (next-sig nil)
              (idx 0))
+        (when (= sig-start (point-max)) ;; no signature found in mail
+          (goto-char (point-min))
+          (if (re-search-forward "\<#part" nil t)
+              (goto-char (- (match-beginning 0) 1))
+            (goto-char sig-start))
+          (insert "--\n")
+          (setq sig-start (point)
+                sig-end sig-start))
         (unless (and signame (setq next-sig (cdr (assoc signame mu4e-goodies-signatures))))
           (dolist (elt mu4e-goodies-signatures next-sig)
             (setq idx (if (= (+ 1 idx) (length mu4e-goodies-signatures)) 0 (+ 1 idx)))
@@ -49,7 +57,7 @@ if signame is not given"
               (setq signame (car (nth idx mu4e-goodies-signatures)))
               (setq next-sig (cdr (nth idx mu4e-goodies-signatures))))))
         (unless next-sig
-          (setq signame "mu4e's default signature")
+          (setq signame "default signature")
           (setq next-sig (cdr (car mu4e-goodies-signatures))))
         (delete-region sig-start sig-end)
         (message "signature switched to %s" signame)
