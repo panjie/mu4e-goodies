@@ -94,5 +94,37 @@ If focusnew is t, the new window/frame will be focused"
 
 (define-key 'mu4e-headers-mode-map "K" 'mu4e-goodies-save-last-query-to-bookmarks)
 
+;;
+;; Quickly delete one email address in TO/CC/BCC fields
+;;
+(defun mu4e-goodies-delete-address ()
+  "Quickly delete one email address in TO/CC/BCC fields"
+  (interactive)
+  (let ((addr-begin nil)
+        (addr-end nil)
+        (pos-temp nil))
+    ;; Search for the beginning of the addresses, which maybe like:
+    ;; - "XXX, YYY/ZZZ" <abc@def.com>
+    ;; - abc@def.com
+    (if (search-backward "," nil t)
+        (if (re-search-backward "\"[^,]+" nil t)
+            ;; "XXX, YYY/ZZZ" <abc.def.com>
+            ;; ^---^
+            (setq addr-begin (point))
+          ;; ..., abc@def.com
+          ;;    ^
+          (setq addr-begin (+ 1 (point))))
+      ;; To: abc@def.com
+      ;; somewhere in the first of address list
+      (setq addr-begin (+ 4 (search-backward "To: " nil t))))
+    (goto-char addr-begin)
+    (if (re-search-forward "[^@]+@[^.]+\.[^,]+," nil t)
+        ;; "XXX, YYY/ZZZ" <abc.def.com>,
+        ;;                             ^
+        (setq addr-end (point))
+      ;; at the end of address list
+      (setq addr-end (line-end-position)))
+    (delete-region addr-begin addr-end)))
+
 
 (provide 'mu4e-goodies-hacks)
