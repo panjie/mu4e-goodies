@@ -126,5 +126,19 @@ If focusnew is t, the new window/frame will be focused"
       (setq addr-end (line-end-position)))
     (delete-region addr-begin addr-end)))
 
+;;
+;; Make To/Cc/Subject to be uneditable
+;;
+(defun mu4e~draft-header (hdr val)
+  "Return a header line of the form \"HDR: VAL\".
+If VAL is nil, return nil. Overried by panjie@gmail.com"
+  ;; note: the propertize here is currently useless, since gnus sets its own
+  ;; later.
+  (when val
+    (format "%s%s\n"
+            (propertize (concat hdr ": ") 'face 'mu4e-header-key-face
+                        'read-only t
+                        'rear-nonsticky t)
+            (propertize val 'face 'mu4e-header-value-face))))
 
 (provide 'mu4e-goodies-hacks)
