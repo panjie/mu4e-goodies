@@ -79,18 +79,19 @@ If focusnew is t, the new window/frame will be focused"
 (defun mu4e-goodies-save-last-query-to-bookmarks (&optional notsave)
   "Save last query to mu4e-bookmarks and save to custom file"
   (interactive "P")
-  (let ((name "")
-        (key nil))
-    ;; TODO: check if name and key are already exist in mu4e-bookmarks
-    (while (= (length name) 0)
-      (setq name (read-string "Bookmark name: ")))
-    (unless (and key (= ?w (char-syntax key)))
-      (setq key (read-char "Key: ")))
-    (add-to-list 'mu4e-bookmarks (list (mu4e-last-query) name key) t)
-    ;; save it
-    (unless notsave
-      (mu4e-message "Saving bookmark %s..." name)
-      (customize-save-variable 'mu4e-bookmarks mu4e-bookmarks))))
+  (when (> (length (mu4e-last-query)) 0)
+    (let ((name "")
+          (key nil))
+      ;; TODO: check if name and key are already exist in mu4e-bookmarks
+      (while (= (length name) 0)
+        (setq name (read-string "Bookmark name: ")))
+      (unless (and key (= ?w (char-syntax key)))
+        (setq key (read-char "Key: ")))
+      (add-to-list 'mu4e-bookmarks (list (mu4e-last-query) name key) t)
+      ;; save it
+      (unless notsave
+        (mu4e-message "Saving bookmark %s..." name)
+        (customize-save-variable 'mu4e-bookmarks mu4e-bookmarks)))))
 
 (define-key 'mu4e-headers-mode-map "K" 'mu4e-goodies-save-last-query-to-bookmarks)
 
