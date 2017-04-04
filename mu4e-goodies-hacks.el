@@ -127,5 +127,16 @@ If focusnew is t, the new window/frame will be focused"
       (setq addr-end (line-end-position)))
     (delete-region addr-begin addr-end)))
 
+(defun mu4e-goodies-wrapped-delete (orig-func)
+  "When in address related fields, call mu4e-goodies-delete-address. 
+Otherwise call orig-func which is usually \\M-d"
+  (interactive)
+  (let ((eoh ;; end-of-headers
+        (save-excursion
+          (goto-char (point-min))
+          (search-forward-regexp mail-header-separator nil t))))
+    (if (and eoh (> eoh (point)) (mail-abbrev-in-expansion-header-p))
+        (mu4e-goodies-delete-address)
+      (funcall orig-func))))
 
 (provide 'mu4e-goodies-hacks)
