@@ -79,18 +79,19 @@ If focusnew is t, the new window/frame will be focused"
 (defun mu4e-goodies-save-last-query-to-bookmarks (&optional notsave)
   "Save last query to mu4e-bookmarks and save to custom file"
   (interactive "P")
-  (let ((name "")
-        (key nil))
-    ;; TODO: check if name and key are already exist in mu4e-bookmarks
-    (while (= (length name) 0)
-      (setq name (read-string "Bookmark name: ")))
-    (unless (and key (= ?w (char-syntax key)))
-      (setq key (read-char "Key: ")))
-    (add-to-list 'mu4e-bookmarks (list (mu4e-last-query) name key) t)
-    ;; save it
-    (unless notsave
-      (mu4e-message "Saving bookmark %s..." name)
-      (customize-save-variable 'mu4e-bookmarks mu4e-bookmarks))))
+  (when (> (length (mu4e-last-query)) 0)
+    (let ((name "")
+          (key nil))
+      ;; TODO: check if name and key are already exist in mu4e-bookmarks
+      (while (= (length name) 0)
+        (setq name (read-string "Bookmark name: ")))
+      (unless (and key (= ?w (char-syntax key)))
+        (setq key (read-char "Key: ")))
+      (add-to-list 'mu4e-bookmarks (list (mu4e-last-query) name key) t)
+      ;; save it
+      (unless notsave
+        (mu4e-message "Saving bookmark %s..." name)
+        (customize-save-variable 'mu4e-bookmarks mu4e-bookmarks)))))
 
 (define-key 'mu4e-headers-mode-map "K" 'mu4e-goodies-save-last-query-to-bookmarks)
 
@@ -126,19 +127,16 @@ If focusnew is t, the new window/frame will be focused"
       (setq addr-end (line-end-position)))
     (delete-region addr-begin addr-end)))
 
-;;
-;; Make To/Cc/Subject to be uneditable
-;;
-(defun mu4e~draft-header (hdr val)
-  "Return a header line of the form \"HDR: VAL\".
-If VAL is nil, return nil. Overried by panjie@gmail.com"
-  ;; note: the propertize here is currently useless, since gnus sets its own
-  ;; later.
-  (when val
-    (format "%s%s\n"
-            (propertize (concat hdr ": ") 'face 'mu4e-header-key-face
-                        'read-only t
-                        'rear-nonsticky t)
-            (propertize val 'face 'mu4e-header-value-face))))
+(defun mu4e-goodies-wrapped-delete (orig-func)
+  "When in address related fields, call mu4e-goodies-delete-address. 
+Otherwise call orig-func which is usually \\M-d"
+  (interactive)
+  (let ((eoh ;; end-of-headers
+        (save-excursion
+          (goto-char (point-min))
+          (search-forward-regexp mail-header-separator nil t))))
+    (if (and eoh (> eoh (point)) (mail-abbrev-in-expansion-header-p))
+        (mu4e-goodies-delete-address)
+      (funcall orig-func))))
 
 (provide 'mu4e-goodies-hacks)

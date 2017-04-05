@@ -52,7 +52,8 @@ default behaviors of mu4e.
    `'` under mu4e-view mode.
 2. Always put attachements to the bottom of mail
 3. Quickly add last query to bookmarks
-4. *TODO* Remove duplicated signatures and mail headers which are very common
+4. Quickly delete whole address in TO/CC/BCC fields
+5. *TODO* Remove duplicated signatures and mail headers which are very common
    in mails sent by Outlook before sent.
 
 
