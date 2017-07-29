@@ -15,6 +15,13 @@
 (require 'mu4e)
 
 ;;
+;; Set hl-line-sticky-flag to t so that message in header view will
+;; still be high lighted even when viewing the message
+;;
+
+(setq hl-line-sticky-flag t)
+
+;;
 ;; Add the following menu item to the Message menu:
 ;; - Insert the captured message
 ;; 
