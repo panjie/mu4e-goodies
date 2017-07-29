@@ -3,4 +3,7 @@
 
 # Packaging
 .cask
+
+# Emacs related
 /.projectile
+TAGS
