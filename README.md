@@ -90,6 +90,17 @@ To use this extension, you may have to customize the variable
 `mu4e-goodies-keywords`.
 
 
+mu4e-goodies-better-thread (working)
+--------------------------
 
+Provide better thread view like:
 
+```
+▪xxxxxxxxxxxxxxxxxxxx
+├▪xxxxxxxxxxxxxxxxxxxx
+├▪wwwwwwwwwwwwwwwwwwww
+│├▪xxxxxxxxxxxxxxxxxxxx
+│└▪xxxxxxxxxxxxxxxxxxxx
+└▪zzzzzzzzzzzzzzzzzzzz
+```
 
