@@ -55,6 +55,8 @@ default behaviors of mu4e.
 4. Quickly delete whole address in TO/CC/BCC fields
 5. *TODO* Remove duplicated signatures and mail headers which are very common
    in mails sent by Outlook before sent.
+6. Make the highlight of message in header view retained even when
+   viewing the message, so we can distinguish which mail is read now.
 
 
 
