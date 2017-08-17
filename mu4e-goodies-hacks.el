@@ -56,7 +56,7 @@ If focusnew is t, the new window/frame will be focused"
         (progn
           (setq new-frm (make-frame))
           (select-frame-set-input-focus frm)))
-      (mu4e-view mu4e~view-msg mu4e~view-headers-buffer)
+      (mu4e-view mu4e~view-msg)
       (when focusnew
         (if towin
             (select-window new-win)
@@ -94,7 +94,7 @@ If focusnew is t, the new window/frame will be focused"
         (setq name (read-string "Bookmark name: ")))
       (unless (and key (= ?w (char-syntax key)))
         (setq key (read-char "Key: ")))
-      (add-to-list 'mu4e-bookmarks (list (mu4e-last-query) name key) t)
+      (mu4e-bookmark-define mu4e-last-query name key)
       ;; save it
       (unless notsave
         (mu4e-message "Saving bookmark %s..." name)
