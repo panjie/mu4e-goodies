@@ -146,4 +146,21 @@ Otherwise call orig-func which is usually \\M-d"
         (mu4e-goodies-delete-address)
       (funcall orig-func))))
 
+
+(defun mu4e~fontify-signature ()
+  "Give the message signatures a distinctive color. This is used in
+the view and compose modes."
+  (let ((inhibit-read-only t))
+    (save-excursion
+      ;; give the footer a different color...
+      (goto-char (point-min))
+      (let* ((p (re-search-forward "^---* *$" nil t))
+             (q nil))
+        (when p
+          (setq p (match-beginning 0))
+          (setq q (re-search-forward "^ *$" nil t))
+          (add-text-properties p
+                               (or q (point-max))
+                               '(face mu4e-footer-face)))))))
+
 (provide 'mu4e-goodies-hacks)
