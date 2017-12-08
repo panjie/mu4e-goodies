@@ -94,7 +94,7 @@ If focusnew is t, the new window/frame will be focused"
         (setq name (read-string "Bookmark name: ")))
       (unless (and key (= ?w (char-syntax key)))
         (setq key (read-char "Key: ")))
-      (mu4e-bookmark-define mu4e-last-query name key)
+      (mu4e-bookmark-define (mu4e-last-query) name key)
       ;; save it
       (unless notsave
         (mu4e-message "Saving bookmark %s..." name)

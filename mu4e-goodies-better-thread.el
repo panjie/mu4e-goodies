@@ -24,7 +24,8 @@
 
 (require 'mu4e)
 
-
+(defvar mu4e-goodies-better-thread-prefix-root "▪")
+(defvar mu4e-goodies-better-thread-prefix-
 
 
 
