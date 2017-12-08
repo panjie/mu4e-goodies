@@ -60,11 +60,11 @@ default behaviors of mu4e.
 7. Fontify the signatures
 8. Using "\M-d" to delete the whole address in to/cc field no matter the
    positon of the cursor
-   ```
+```
 (define-key mu4e-compose-mode-map "\M-d" (lambda ()
     (interactive)
     (mu4e-goodies-wrapped-delete 'kill-word)))
-   ```
+```
 
 
 
