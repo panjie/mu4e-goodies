@@ -24,5 +24,6 @@
 (require 'mu4e-goodies-actions)
 (require 'mu4e-goodies-hacks)
 (require 'mu4e-goodies-keyword-alert)
+(require 'mu4e-goodies-tags)
 
 (provide 'mu4e-goodies)
