@@ -53,15 +53,12 @@
         (mu4e-action-retag-message msg (concat "-" mu4e-goodies~quick-tag))
       (mu4e-action-retag-message msg (concat "+" mu4e-goodies~quick-tag)))))
 
-(defun mu4e-goodies-search-quick-tag ()
-  (interactive)
-  (
-
 (define-key mu4e-headers-mode-map (kbd "M") 'mu4e-goodies-add-del-quick-tag)
 (define-key mu4e-view-mode-map (kbd "M") 'mu4e-goodies-add-del-quick-tag)
 (define-key mu4e-headers-mode-map (kbd "k") (lambda ()
                                               (interactive)
-                                              (mu4e~headers-search-execute "tag:QT**" t)))
+                                              (mu4e~headers-search-execute (concat "tag:" mu4e-goodies~quick-tag) t)))
 
 (provide 'mu4e-goodies-tags)
+
 
