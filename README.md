@@ -65,7 +65,7 @@ default behaviors of mu4e.
     (interactive)
     (mu4e-goodies-wrapped-delete 'kill-word)))
 ```
-
+9. Quickly add(`M`)/remove(`M`)/search(`k`) flag to mails
 
 
 mu4e-goodies-actions
@@ -106,7 +106,6 @@ Provide usable functions for tag emails
 
 1. Action(`a`) to add tags in message view
 2. Shortcut(`G`) to mark to add tags in header view
-3. Quickly add(`M`)/remove(`M`)/search(`k`) quick tag(named `QT**`)
 
 mu4e-goodies-better-thread (working)
 --------------------------

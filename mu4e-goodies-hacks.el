@@ -146,6 +146,9 @@ Otherwise call orig-func which is usually \\M-d"
         (mu4e-goodies-delete-address)
       (funcall orig-func))))
 
+;;
+;; Fontify signature
+;;
 
 (defun mu4e~fontify-signature ()
   "Give the message signatures a distinctive color. This is used in
@@ -162,5 +165,29 @@ the view and compose modes."
           (add-text-properties p
                                (or q (point-max))
                                '(face mu4e-footer-face)))))))
+
+;;
+;; Quickly add/remove/search for flag
+;;
+
+(defun mu4e-goodies~hacks-flag-unflag ()
+  (interactive)
+  (let* ((msg (mu4e-message-at-point))
+         (docid (mu4e-message-field msg :docid))
+         (flags (mu4e-message-field msg :flags)))
+    (if (memq 'flagged flags)
+        (progn
+          (mu4e-message "unflagging...")
+          (mu4e~proc-move docid nil "-F-N"))
+      (progn
+        (mu4e-message "flagging...")
+        (mu4e~proc-move docid nil "+F-u-N")))))
+
+(define-key mu4e-headers-mode-map (kbd "M") 'mu4e-goodies~hacks-flag-unflag)
+(define-key mu4e-view-mode-map (kbd "M") 'mu4e-goodies~hacks-flag-unflag)
+(define-key mu4e-headers-mode-map (kbd "k") (lambda ()
+                                              (interactive)
+                                              (mu4e~headers-search-execute "flag:f" t)))
+
 
 (provide 'mu4e-goodies-hacks)
