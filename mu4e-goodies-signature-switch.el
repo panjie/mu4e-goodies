@@ -18,15 +18,20 @@
 ;; Signature swith
 ;;============================================================
 
-(defvar mu4e-goodies-signatures nil
+(defcustom mu4e-goodies-signatures nil
   "List of signatures used by mu4e-goodies-signature-switch,
   which is an alist like:
-((\"sig name\" . \"XXX/xxx@gmail.com\")  (\"sig name\" . \"YYY/yyy@yahoo.com\"))")
+((signame . \"XXX/xxx@gmail.com\")  (signame . \"YYY/yyy@yahoo.com\"))"
+:type '(list (cons symbol string))
+:group 'mu4e-goodies)
 
-(defvar mu4e-goodies-signature-switch-rules nil
+
+(defcustom mu4e-goodies-signature-switch-rules nil
   "Rules of signature swith, which is an alist like:
-((\"regexp-to-match-address\" . \"sig name\") ...)
-The rules will only apply to the first recipient's address")
+((\"regexp-to-match-address\" . signame) ...)
+The rules will only apply to the first recipient's address"
+:type '(list (cons string symbol))
+:group 'mu4e-goodies)
 
 (defun mu4e-goodies-switch-signature (&optional signame)
   "Switch between signatures defined in mu4e-goodies-signatures
