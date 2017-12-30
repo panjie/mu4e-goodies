@@ -15,10 +15,10 @@ the following 3 variables:
 2. `mu4e-headers-show-threads`
 3. `mu4e-headers-include-related`
 
-mu4e-goodies-lync
+mu4e-goodies-lync(Windows only)
 -----------------
 
-aThis extension let you open lync chat window directly from mu4e.
+This extension let you open lync chat window directly from mu4e.
 Note that because it's is implemented only by open URI like
 `sip:xxx@yyy.com`, so technically the registed application for
 `sip` will be opened(which on Windows will usually be Lync).
@@ -52,18 +52,17 @@ default behaviors of mu4e.
    `'` under mu4e-view mode.
 2. Always put attachements to the bottom of mail
 3. Quickly add last query to bookmarks
-4. Quickly delete whole address in TO/CC/BCC fields
-5. *TODO* Remove duplicated signatures and mail headers which are very common
+4. *TODO* Remove duplicated signatures and mail headers which are very common
    in mails sent by Outlook before sent.
-6. Make the highlight of message in header view retained even when
+5. Make the highlight of message in header view retained even when
    viewing the message, so we can distinguish which mail is read now.
-7. Fontify the signatures
-8. Using "\M-d" to delete the whole address in to/cc field no matter the
-   positon of the cursor
-```
-(define-key mu4e-compose-mode-map "\M-d" (lambda ()
-    (interactive)
-    (mu4e-goodies-wrapped-delete 'kill-word)))
+6. Fontify the signatures
+7. Using "\M-d" to quickly delete the whole address in to/cc field no
+   matter the positon of the cursor 
+``` 
+(define-key
+   mu4e-compose-mode-map "\M-d" (lambda () (interactive)
+   (mu4e-goodies-wrapped-delete 'kill-word))) 
 ```
 9. Quickly add(`M`)/remove(`M`)/search(`k`) flag to mails
 
