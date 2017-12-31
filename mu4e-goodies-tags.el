@@ -70,46 +70,60 @@
   "Face for show tags in header view."
   :group 'mu4e-goodies)
 
+(defun mu4e-goodies-headers-add-tags-to-subject (msg field val width)
+  "Add tags to header view's subject field like: [TAG] Subject..."
+  (if (eq field :subject)
+      (let ((tags (mu4e-message-field msg :tags)))
+        (if tags 
+            (setq val (concat
+                       (mapconcat (function (lambda (x) (propertize (concat "[" x "]") 'face 'mu4e-goodies-face-tags)))
+                                  tags "")
+                       " "
+                       val))
+          val))
+    val))
 
-(require 'mu4e-headers)
 
-;; an ugly implement for this
-(defun mu4e~headers-field-apply-basic-properties (msg field val width)
-  (case field
-    (:subject
-     (concat ;; prefix subject with a thread indicator
-      (mu4e~headers-thread-prefix (mu4e-message-field msg :thread))
+(add-to-list 'mu4e~headers-field-handler-functions 'mu4e-goodies-headers-add-tags-to-subject)
 
-      ;; a hook should be here
-      (if (mu4e-message-field msg :tags)
-          (progn 
-            (setq val (concat (mapconcat (function (lambda (x) (propertize (concat "[" x "]") 'face 'mu4e-goodies-face-tags)))
-                                         (mu4e-message-field msg :tags) "")
-                              " "
-                              val))
+
+;; ;; an ugly implement for this
+;; (defun mu4e~headers-field-apply-basic-properties (msg field val width)
+;;   (case field
+;;     (:subject
+;;      (concat ;; prefix subject with a thread indicator
+;;       (mu4e~headers-thread-prefix (mu4e-message-field msg :thread))
+
+;;       ;; a hook should be here
+;;       (if (mu4e-message-field msg :tags)
+;;           (progn 
+;;             (setq val (concat (mapconcat (function (lambda (x) (propertize (concat "[" x "]") 'face 'mu4e-goodies-face-tags)))
+;;                                          (mu4e-message-field msg :tags) "")
+;;                               " "
+;;                               val))
             
-            ;;  "["(plist-get (mu4e-message-field msg :thread) :path) "] "
-            ;; work-around: emacs' display gets really slow when lines are too long;
-            ;; so limit subject length to 600
-            (truncate-string-to-width val 600))
-        (truncate-string-to-width val 600))))
-    (:thread-subject (mu4e~headers-thread-subject msg))
-    ((:maildir :path :message-id) val)
-    ((:to :from :cc :bcc) (mu4e~headers-contact-str val))
-    ;; if we (ie. `user-mail-address' is the 'From', show
-    ;; 'To', otherwise show From
-    (:from-or-to (mu4e~headers-from-or-to msg))
-    (:date (format-time-string mu4e-headers-date-format val))
-    (:mailing-list (mu4e~headers-mailing-list val))
-    (:human-date (propertize (mu4e~headers-human-date msg)
-			     'help-echo (format-time-string
-					 mu4e-headers-long-date-format
-					 (mu4e-msg-field msg :date))))
-    (:flags (propertize (mu4e~headers-flags-str val)
-			'help-echo (format "%S" val)))
-    (:tags (propertize (mapconcat 'identity val ", ")))
-    (:size (mu4e-display-size val))
-    (t (mu4e~headers-custom-field msg field))))
+;;             ;;  "["(plist-get (mu4e-message-field msg :thread) :path) "] "
+;;             ;; work-around: emacs' display gets really slow when lines are too long;
+;;             ;; so limit subject length to 600
+;;             (truncate-string-to-width val 600))
+;;         (truncate-string-to-width val 600))))
+;;     (:thread-subject (mu4e~headers-thread-subject msg))
+;;     ((:maildir :path :message-id) val)
+;;     ((:to :from :cc :bcc) (mu4e~headers-contact-str val))
+;;     ;; if we (ie. `user-mail-address' is the 'From', show
+;;     ;; 'To', otherwise show From
+;;     (:from-or-to (mu4e~headers-from-or-to msg))
+;;     (:date (format-time-string mu4e-headers-date-format val))
+;;     (:mailing-list (mu4e~headers-mailing-list val))
+;;     (:human-date (propertize (mu4e~headers-human-date msg)
+;; 			     'help-echo (format-time-string
+;; 					 mu4e-headers-long-date-format
+;; 					 (mu4e-msg-field msg :date))))
+;;     (:flags (propertize (mu4e~headers-flags-str val)
+;; 			'help-echo (format "%S" val)))
+;;     (:tags (propertize (mapconcat 'identity val ", ")))
+;;     (:size (mu4e-display-size val))
+;;     (t (mu4e~headers-custom-field msg field))))
 
 (provide 'mu4e-goodies-tags)
 

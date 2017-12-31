@@ -105,9 +105,7 @@ Provide usable functions for tag emails
 
 1. Action(`a`) to add tags in message view
 2. Shortcut(`G`) to mark to add tags in header view
-3. Show tags in header view like: `[TAG] Subject...` . It's
-   implementation is ugly which means I redefined
-   `mu4e~headers-field-apply-basic-properties`.
+3. Show tags in header view like: `[TAG] Subject...`
 
 mu4e-goodies-better-thread (working)
 --------------------------
