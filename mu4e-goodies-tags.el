@@ -26,9 +26,9 @@
              '(tag
                :char       ("g" . " ")
                :prompt     "gtag"
-               :ask-target (lambda () (read-string "What tag do you want to add: "))
+               :ask-target (lambda () (read-string "What tag do you want to add/remove(+/-): "))
                :action      (lambda (docid msg target)
-                              (mu4e-action-retag-message msg (concat "+" target)))))
+                              (mu4e-action-retag-message msg target))))
 (mu4e~headers-defun-mark-for tag)
 (define-key mu4e-headers-mode-map (kbd "G") 'mu4e-headers-mark-for-tag)
 (define-key-after (lookup-key mu4e-headers-mode-map [menu-bar headers])
