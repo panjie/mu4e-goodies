@@ -20,7 +20,7 @@
   "Lync with the email address at point if parameter email is not given.
 
 Note:
-- It will only work under windows/cygwin
+- It will only work under windows/cygwin/macOS
 - If used under cygwin, you should prepare a script named \"lya.bat\" like the following:
   -----------------------------------------
   @echo off
@@ -36,23 +36,25 @@ Note:
   :END
 
   IF NOT !SIPS! == \"\" start im:!SIPS!
-  ----------------------------------------"
+  ----------------------------------------
+- If used under macOS, SkypeFB is required."
+  
   (interactive)
   (if (and (listp emails) (> (length emails) 0))
       ;; an email list
-      (if (eq system-type 'windows-nt)
-          (browse-url (let ((uri "im:"))
-                        (dolist (email emails)
-                          (unless (string= email user-mail-address) 
-                            (setq uri (concat uri "<sip:" email ">"))))
-                        (mu4e-message "Lync with %s" uri)
-                        uri))
-        (when (eq system-type 'cygwin)
-          (let ((str ""))
-            (dolist (email emails)
-              (unless (string= email user-mail-address)
-                (setq str (concat str " " email))))
-            (shell-command (concat "lya.bat " str)))))
+      (cond ((eq system-type 'windows-nt)
+             (browse-url (let ((uri "im:"))
+                           (dolist (email emails)
+                             (unless (string= email user-mail-address) 
+                               (setq uri (concat uri "<sip:" email ">"))))
+                           (mu4e-message "Lync with %s" uri)
+                           uri)))
+            ((eq system-type 'cygwin)
+             (let ((str ""))
+               (dolist (email emails)
+                 (unless (string= email user-mail-address)
+                   (setq str (concat str " " email))))
+               (shell-command (concat "lya.bat " str)))))
     (if (stringp emails)
         ;; a single email
         (browse-url (concat "sip:" emails))
