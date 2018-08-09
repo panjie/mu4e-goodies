@@ -55,13 +55,17 @@ Note:
                  (unless (string= email user-mail-address)
                    (setq str (concat str " " email))))
                (shell-command (concat "lya.bat " str)))))
-    (if (stringp emails)
-        ;; a single email
-        (browse-url (concat "sip:" emails))
-      ;; get email address from point
-      (browse-url (concat "sip:" (get-text-property (point) 'email))))))
-
+    (if (not emails)
+        ;; evoke a lync/skypeFB window to the sender of the mail
+        (browse-url (concat "sip:" (cdar (mu4e-message-field (mu4e-message-at-point t) :from))))
+      (if (stringp emails)
+          ;; a single email
+          (browse-url (concat "sip:" emails))
+        ;; get email address from point
+        (browse-url (concat "sip:" (get-text-property (point) 'email)))))))
+  
 
 (define-key mu4e-view-contacts-header-keymap "L" 'mu4e-goodies-lync-chat)
+(define-key mu4e-view-mode-map "L" 'mu4e-goodies-lync-chat)
 
 (provide 'mu4e-goodies-lync)
