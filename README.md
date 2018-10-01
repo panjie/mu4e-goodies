@@ -28,6 +28,8 @@ Way to use:
 1. Move cursor to any contacts in `mu4e:view` mode
 2. Press `L` to open Lync chat window with the contact
 
+Or, press `L` in message body of `mu4e:view` mode will open a chat
+window with the sender.
 
 mu4e-goodies-signature-switch
 -----------------------------
@@ -78,7 +80,7 @@ Some actions maybe useful to you.
    is bound to `t` in message view.
 3. Quick search all emails sent by current email's sender. This is
    bound to `x` in message view.
-4. *TODO* Lync with all contacts in the current email. This is bound
+4. Lync with all contacts in the current email. This is bound
    to `L` in message view.
 5. Create org todo/meeting from current message. This is bounded to
    `n/m` in message view
@@ -107,17 +109,5 @@ Provide usable functions for tag emails
 2. Shortcut(`G`) to mark to add tags in header view
 3. Show tags in header view like: `[TAG] Subject...`
 
-mu4e-goodies-better-thread (working)
---------------------------
 
-Provide better thread view like:
-
-```
-▪xxxxxxxxxxxxxxxxxxxx
-├▪xxxxxxxxxxxxxxxxxxxx
-├▪wwwwwwwwwwwwwwwwwwww
-│├▪xxxxxxxxxxxxxxxxxxxx
-│└▪xxxxxxxxxxxxxxxxxxxx
-└▪zzzzzzzzzzzzzzzzzzzz
-```
 
