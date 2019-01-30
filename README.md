@@ -15,13 +15,13 @@ the following 3 variables:
 2. `mu4e-headers-show-threads`
 3. `mu4e-headers-include-related`
 
-mu4e-goodies-lync(Windows only)
+mu4e-goodies-lync
 -----------------
 
-This extension let you open lync chat window directly from mu4e.
+This extension let you open lync/skypeFB chat window directly from mu4e.
 Note that because it's is implemented only by open URI like
-`sip:xxx@yyy.com`, so technically the registed application for
-`sip` will be opened(which on Windows will usually be Lync).
+`sip:xxx@yyy.com`, so technically the registed application for `sip`
+will be opened(which on Windows will usually be Lync).
 
 Way to use:
 

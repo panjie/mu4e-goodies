@@ -41,7 +41,8 @@ Note:
   
   (interactive)
   (if (and (listp emails) (> (length emails) 0))
-      ;; an email list
+      ;; group chat with all the contacts specified in emails
+      ;; only supported under windows/cygwin
       (cond ((eq system-type 'windows-nt)
              (browse-url (let ((uri "im:"))
                            (dolist (email emails)
@@ -57,9 +58,11 @@ Note:
                (shell-command (concat "lya.bat " str)))))
     (if (not emails)
         ;; evoke a lync/skypeFB window to the sender of the mail
-        (browse-url (concat "sip:" (cdar (mu4e-message-field (mu4e-message-at-point t) :from))))
+        (if (get-text-property (point) 'email)
+            (browse-url (concat "sip:" (get-text-property (point) 'email)))
+          (browse-url (concat "sip:" (cdar (mu4e-message-field (mu4e-message-at-point t) :from)))))
       (if (stringp emails)
-          ;; a single email
+          ;; chat with single contact specified by emails
           (browse-url (concat "sip:" emails))
         ;; get email address from point
         (browse-url (concat "sip:" (get-text-property (point) 'email)))))))
