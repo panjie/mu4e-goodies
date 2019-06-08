@@ -99,11 +99,21 @@ To use this extension, you may have to customize the variable
 mu4e-goodies-tags
 --------------------------
 
-Provide usable functions for tag emails
+Provide usable functions for tag emails.
 
 1. Action(`a`) to add tags in message view
 2. Shortcut(`G`) to mark to add tags in header view
 3. Show tags in header view like: `[TAG] Subject...`
 
+mu4e-goodies-header-color
+--------------------------
 
+Highlights specified keywords in header view. You should customize the
+value of `mu4e-goodies-special-field-keywords` like the following to
+make it work.
+
+```
+(setq mu4e-goodies-special-field-keywords '((:from . ("vip1@xxx.com" "vip2@xxx.com" ...))
+                                            (:subject . ("regexp_for_keyword" ...))))
+```
 
