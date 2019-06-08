@@ -12,31 +12,38 @@
 ;; See the License for the specific language governing permissions and
 ;; limitations under the License.
 
+;;---
+;; highlight specified keywords in header view
+;;---
+
 (require 'mu4e-goodies-utils)
 
-(defvar mu4e-goodies-special-field-keywords
-  '((:from . (nagakura@cn.fujitsu.com))))
+(defcustom mu4e-goodies-special-field-keywords nil
+  "Special keywords to be highlighted in header view.
+Example: 
+((:from . (\"vip@company.com\" ...))(:subject . (\"NOTICE\" ...)))"
+  :type 'alist
+  :group 'mu4e-goodies)
 
-;;
-;; Show tags in the header view
-;;
 (defface mu4e-goodies-face-special-keywords
-  '((((class color) (background light)) :weight bold :foreground "#8CD0D3")
-    (((class color) (background  dark)) :weight bold :foreground "#8CD0D3"))
+  '((t :inverse-video t))
   "Face for showing special mails in header view"
   :group 'mu4e-goodies)
 
 (defun mu4e-goodies-header-add-color (msg field val width)
-  "Add tags to header view's subject field like: [TAG] Subject..."
+  "highlight specified keywords in header view"
   (if (assoc field mu4e-goodies-special-field-keywords)
-      (let ((pair (assoc field mu4e-goodies-special-field-keywords))
-            (realaddr (when (member field '(:from :to :cc :bcc)) ; address fields
-                        (mu4e-goodies~get-real-addr val))))
-        (if (member (if realaddr realaddr val) (cdr pair))
-            (propertize val 'face 'mu4e-goodies-face-special-keywords)
-          val))
+      (let* ((keywords (cdr (assoc field mu4e-goodies-special-field-keywords))))
+        (cond ((stringp val)            ; may be a subject or something else
+               (dolist (kw keywords val)
+                 (when (string-match-p kw val)
+                   (setq val (propertize val 'face 'mu4e-goodies-face-special-keywords)))))
+              ((and (eq field :from) (listp val) (member (cdar val) keywords)) ; from field whose val should be like: (("XXX" . "xxx@yyy.com") ...)
+               (list (cons (propertize (caar val) 'face 'mu4e-goodies-face-special-keywords)
+                           (propertize (cdar val) 'face 'mu4e-goodies-face-special-keywords))))
+              (t val)))
     val))
-                              
+
 (add-to-list 'mu4e~headers-field-handler-functions 'mu4e-goodies-header-add-color)
 
 (provide 'mu4e-goodies-header-color)

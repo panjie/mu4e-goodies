@@ -77,10 +77,7 @@ if signame is not given"
                          (mu4e-message-field mu4e-compose-parent-message :from)
                        (message-field-value "To")))
           (rules mu4e-goodies-signature-switch-rules))
-      (setq addr (if (listp addr)       ;; already parsed by mu4e
-                     (cdr (car addr))
-                   (if (stringp addr)   ;; raw address like: "ABC <abc@abc.com>"
-                       (car (mail-header-parse-address addr)))))
+      (setq addr (mu4e-goodies~get-real-addr addr))
       (while (and rules (not (string-match-p (caar rules) addr)))
         (setq rules (cdr rules)))
       (when rules

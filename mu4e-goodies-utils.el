@@ -18,7 +18,7 @@
 ;; some utility functions
 ;;
 
-(defun mu4e-goodies~get-real-addr (addr)
+(defsubst mu4e-goodies~get-real-addr (addr)
   "Parse addr which is the result of mu4e-message-fields to get
 the real email address"
   (if (listp addr)       ;; already parsed by mu4e
