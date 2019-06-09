@@ -19,11 +19,10 @@
 ;;============================================================
 
 (defcustom mu4e-goodies-signatures nil
-  "List of signatures used by mu4e-goodies-signature-switch,
-  which is an alist like:
+  "List of signatures used by mu4e-goodies-signature-switch, which is an alist like:
 ((signame . \"XXX/xxx@gmail.com\")  (signame . \"YYY/yyy@yahoo.com\"))"
-:type '(list (cons symbol string))
-:group 'mu4e-goodies)
+  :type '(list (cons symbol string))
+  :group 'mu4e-goodies)
 
 
 (defcustom mu4e-goodies-signature-switch-rules nil

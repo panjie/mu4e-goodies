@@ -14,8 +14,19 @@ This extension provides simple signature switch function for mu4e.
 Way to use:
 
 1. Put signatures you may want to use to `mu4e-goodies-signatures`
+```
+(setq mu4e-goodies-signatures '((default . "default signature")
+                                (work . "signature for work")))
+```
 2. Press `Ctrl-c s`(predefined key-binding) to switch between
    signatures when composing emails in mu4e
+3. By customizing `mu4e-goodies-signature-switch-rules`, signatures
+   could be switched automatically according to the receiver.
+```
+(setq mu4e-goodies-signature-switch-rules
+      '((".*@work.com" . work)
+        (".*@gmail.com" . home)))
+```
 
 
 mu4e-goodies-hacks
@@ -25,10 +36,11 @@ This extension provides some hacks to mu4e to change some
 default behaviors of mu4e.
 
 1. Allow a mu4e-view buffer detached from mu4e-header so that it will be
-   retained in a seperated window or frame. To use this function, press
-   `'` under mu4e-view mode.
+   retained in a seperated window or frame. Press `'` under mu4e-view
+   mode will detach the current message into a new frame. `"` will
+   detach into a window below.
 2. Always put attachements to the bottom of mail
-3. Quickly add last query to bookmarks
+3. Quickly add last query to bookmarks by press`K` under header view.xs
 4. *TODO* Remove duplicated signatures and mail headers which are very common
    in mails sent by Outlook before sent.
 5. Make the highlight of message in header view retained even when
