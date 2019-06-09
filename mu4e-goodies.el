@@ -18,7 +18,6 @@
   "Settings for mu4e-goodies"
   :group 'mu4e)
 
-(require 'mu4e-goodies-indicators)
 (require 'mu4e-goodies-signature-switch)
 (require 'mu4e-goodies-lync)
 (require 'mu4e-goodies-actions)
