@@ -5,6 +5,19 @@ Goodies for mu4e
 full-feature email client runs inside emacs. Here are some
 extensions/hacks of mu4e used by myself.
 
+Setup
+-----
+
+You could have all features of this addon by: 
+```
+(use 'mu4e-goodies)
+```
+
+Otherwise you could pick up any part of this addon by:
+```
+(use 'mu4e-goodies-signature-switch) ;; or other modules
+```
+
 
 mu4e-goodies-signature-switch
 -----------------------------
