@@ -49,14 +49,14 @@ If focusnew is t, the new window/frame will be focused"
          (new-frm nil))
     (when (string= (buffer-name buf) mu4e~view-buffer-name)
       ;; rename it so that it will not be found by mu4e-view
-      (rename-buffer (concat "*mu4e-view*" (mu4e-msg-field mu4e~view-msg :subject) "*") t)
+      (rename-buffer (concat "*mu4e-view*" (mu4e-msg-field (mu4e-message-at-point t) :subject) "*") t)
       (setq mu4e~view-buffer nil)
       (if towin
           (setq new-win (split-window-below))
         (progn
           (setq new-frm (make-frame))
           (select-frame-set-input-focus frm)))
-      (mu4e-view mu4e~view-msg)
+      (mu4e-view (mu4e-message-at-point t))
       (when focusnew
         (if towin
             (select-window new-win)
