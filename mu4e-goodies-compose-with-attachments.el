@@ -27,7 +27,6 @@
 ;;   files+="\"${f}\" "
 ;;   done
 ;; files+=")"
-;; echo $files >> ~/temp/debug.txt
 ;; /Applications/Emacs.app/Contents/MacOS/bin/emacsclient -nc --display ns -e "(mu4e-goodies-compose-with-attachments ${files})"
 ;; ---
 ;;
