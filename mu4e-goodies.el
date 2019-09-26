@@ -25,5 +25,6 @@
 (require 'mu4e-goodies-keyword-alert)
 (require 'mu4e-goodies-tags)
 (require 'mu4e-goodies-header-color)
+(require 'mu4e-goodies-compose-with-attachments)
 
 (provide 'mu4e-goodies)

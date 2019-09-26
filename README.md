@@ -136,3 +136,23 @@ Way to use:
 Or, press `L` in message body of `mu4e:view` mode will open a chat
 window with the sender.
 
+mu4e-goodies-compose-with-attachments
+-----------------
+
+This extension provide helper function for you to create shortcut to
+send mails with attachments in macOS/Windows.
+
+In macOS, create a quick operation in Automator with the following shell
+script:
+
+```
+files="'("
+
+for f in "$@"
+do
+  files+="\"${f}\" "
+done
+files+=")"
+
+/Applications/Emacs.app/Contents/MacOS/bin/emacsclient -nc --display ns -e "(mu4e-goodies-compose-with-attachments ${files})"
+```
