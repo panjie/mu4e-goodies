@@ -24,7 +24,7 @@ mu4e-goodies-signature-switch
 
 This extension provides simple signature switch function for mu4e.
 
-Way to use:
+Usage:
 
 1. Put signatures you want to use to `mu4e-goodies-signatures`
 ```
