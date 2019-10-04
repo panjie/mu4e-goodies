@@ -71,4 +71,23 @@ Note:
 (define-key mu4e-view-contacts-header-keymap "L" 'mu4e-goodies-lync-chat)
 (define-key mu4e-view-mode-map "L" 'mu4e-goodies-lync-chat)
 
+(when (or (eq system-type 'windows-nt) (eq system-type 'cygwin))
+  ;; Lync with all sender and recipients of this mail
+  (defun mu4e-msgv-action-lync-with-all (msg)
+    "Lync with all recipients of this mail"
+    
+    (let ((recipients '()))
+      (dolist (elt (mu4e-message-field msg :from))
+        (add-to-list 'recipients (cdr elt)))
+      (dolist (elt (mu4e-message-field msg :to))
+        (add-to-list 'recipients (cdr elt)))
+      (dolist (elt (mu4e-message-field msg :cc))
+        (add-to-list 'recipients (cdr elt)))
+      (mu4e-goodies-lync-chat recipients)))
+
+  ;; define 'L' as the shortcut
+  (add-to-list 'mu4e-view-actions
+               '("Lync with all" . mu4e-msgv-action-lync-with-all) t)
+  )
+
 (provide 'mu4e-goodies-lync)

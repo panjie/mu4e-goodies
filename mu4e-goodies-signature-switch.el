@@ -29,8 +29,8 @@
   "Rules of signature swith, which is an alist like:
 ((\"regexp-to-match-address\" . signame) ...)
 The rules will only apply to the first recipient's address"
-:type '(list (cons string symbol))
-:group 'mu4e-goodies)
+  :type '(list (cons string symbol))
+  :group 'mu4e-goodies)
 
 (defun mu4e-goodies-switch-signature (&optional signame)
   "Switch between signatures defined in mu4e-goodies-signatures
