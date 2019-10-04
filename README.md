@@ -27,7 +27,7 @@ This extension provides simple signature switch function for mu4e.
 Way to use:
 
 1. Put signatures you want to use to `mu4e-goodies-signatures`
-   ```
+```
 (setq mu4e-goodies-signatures '((default . "default signature")
                                 (work . "signature for work")))
 ```
@@ -36,7 +36,7 @@ Way to use:
 3. By customizing `mu4e-goodies-signature-switch-rules`, signatures
    could be switched automatically according to the receiver's email
    address.
-   ```
+```
 (setq mu4e-goodies-signature-switch-rules
       '((".*@work.com" . work)
         (".*@gmail.com" . default)))
