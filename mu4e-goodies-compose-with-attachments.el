@@ -51,7 +51,7 @@
             (mml-attach-file
              file
              (mailcap-extension-to-mime (file-name-extension file t))
-             (file-name-nondirectory file)
+             nil
              "attachment")
           (mu4e-warn "File not found"))))))
 
