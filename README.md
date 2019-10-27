@@ -3,7 +3,14 @@ Goodies for mu4e
 
 [mu4e](https://github.com/djcb/mu) (mu for emacs)is a
 full-feature email client runs inside emacs. Here are some
-extensions/hacks of mu4e used by myself.
+useful extensions/hacks of mu4e.
+
+- Signature switch by rules
+- Highlight the VIP's mails
+- Check automatically if you forget to add your attachments
+- Interaction with Lync/SkypeFB (in office)
+- Much convenient way to manipulate tags
+- Many useful hacks 
 
 Setup
 -----
