@@ -12,6 +12,10 @@
 
 ;; This file is not a part of GNU Emacs.
 
+
+;;; Commentary:
+;; 
+
 ;;; Code:
 
 (require 'mu4e)
@@ -21,7 +25,7 @@
 
 ;; show current message's html part in browser
 (defun mu4e-msgv-action-view-in-browser (msg)
-  "View the body of the message in a web browser."
+  "View the body of the msg in a web browser."
   (interactive)
   (let ((html (mu4e-msg-field (mu4e-message-at-point t) :body-html))
         (tmpfile (format "%s/%d.html" temporary-file-directory (random))))
@@ -40,7 +44,7 @@
 
 ;; view the mails sent by the sender of current mail
 (defun mu4e-msgv-action-sender-related-mails (msg)
-  "Search all mails sent by current message's sender"
+  "Search all mails sent by current message's sender."
   (mu4e-headers-search
    (concat "from:" (cdar (mu4e-message-field msg :from)))))
 
@@ -60,29 +64,29 @@
 
 ;; Create a todo entry in the specified subtree of specified org file
 (defcustom mu4e-goodies-org-file nil
-  "default org file where the mail-based todo/meeting will be inserted"
+  "Default org file where the mail-based todo/meeting will be inserted."
   :group 'mu4e-goodies)
 
 (defcustom mu4e-goodies-todo-parent-entry nil
-  "The default subtree entry where the mail-based todo item will be inserted"
+  "The default subtree entry where the mail-based todo item will be inserted."
   :group 'mu4e-goodies)
 
 (defcustom mu4e-goodies-meeting-parent-entry nil
-  "The default subtree entry where the mail-based meeting item will be inserted"
+  "The default subtree entry where the mail-based meeting item will be inserted."
   :group 'mu4e-goodies)
 
 (defvar mu4e-goodies-recent-org-file nil
-  "recent org-todo file used")
+  "Recent org-todo file used.")
 
 (defvar mu4e-goodies-recent-todo-parent-entry nil
-  "recent todo parent entry where the new item will be inserted")
+  "Recent todo parent entry where the new item will be inserted.")
 
 (defvar mu4e-goodies-recent-meeting-parent-entry nil
-  "recent meeting parent entry where the new item will be inserted")
+  "Recent meeting parent entry where the new item will be inserted.")
 
 (defun mu4e-goodies-insert-item (todop file entry title &optional ts content)
-  "Insert an new todo/meeting heading with the specified title in the
-subtree of file's entry with the content."
+  "Insert an new todo/meeting heading with the specified title in
+the subtree of file's entry with the content."
   (with-temp-file file
     (org-mode)
     (let ((buf (current-buffer))
@@ -114,7 +118,7 @@ subtree of file's entry with the content."
 ;; - add multi-language support
 ;; - auto save/revert if the org file is already opened
 (defun mu4e-goodies-add-org-item (&optional istodo item-title item-link)
-  "Add org meeting/todo anywhere you want from minibuffer"
+  "Add org meeting/todo anywhere you want from minibuffer."
   (interactive)
   (let ((title item-title)
         (link item-link)
@@ -126,7 +130,7 @@ subtree of file's entry with the content."
     (unless (setq entry (if istodo
                             (or mu4e-goodies-todo-parent-entry
                                 mu4e-goodies-recent-todo-parent-entry)
-                          (or mu4e-goodies-meeting-parent-entry 
+                          (or mu4e-goodies-meeting-parent-entry
                               mu4e-goodies-recent-meeting-parent-entry)))
       (setq entry (read-string "Parent heading: " (if istodo "Tasks" "Meetings") nil nil)))
     (setq ts (with-temp-buffer (org-time-stamp 1)(buffer-string)))
@@ -137,7 +141,7 @@ subtree of file's entry with the content."
       (message "%s [%s] created successfully" (if istodo "Todo" "Meeting") title))))
 
 (defun mu4e-goodies-create-msg-link (msg)
-  "Create a org-link to msg"
+  "Create a org-link to msg."
   (let* ((msgid (or (plist-get msg :message-id) "<none>"))
          (from  (or (plist-get msg :from) '(("none" . "none"))))
          (fromname (car (car from)))
@@ -172,17 +176,17 @@ subtree of file's entry with the content."
     (concat "[[" link "][" (funcall org-mu4e-link-desc-func msg) "]]")))
 
 (defun mu4e-goodies-action-make-todo (msg)
-  "Make an org todo item based on current mail"
+  "Make an org todo item based on current mail."
   (mu4e-goodies-add-org-item t (mu4e-message-field msg :subject)
                              (mu4e-goodies-create-msg-link msg)))
 
 (defun mu4e-goodies-action-make-meeting (msg)
-  "Make an org meeting item based on current mail"
+  "Make an org meeting item based on current mail."
   (mu4e-goodies-add-org-item nil (mu4e-message-field msg :subject)
                              (mu4e-goodies-create-msg-link msg)))
 
 (defun mu4e-goodies-action-copy-org-link (msg)
-  "Copy org link of the message to clipboard"
+  "Copy org link of the message to clipboard."
   (with-temp-buffer
     (insert (mu4e-goodies-create-msg-link msg))
     (clipboard-kill-ring-save (point-min) (point-max))))

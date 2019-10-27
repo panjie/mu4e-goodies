@@ -18,8 +18,8 @@
 
 (defcustom mu4e-goodies-special-field-keywords nil
   "Special keywords to be highlighted in header view.
-Example: 
-((:from . (\"vip@company.com\" ...))(:subject . (\"NOTICE\" ...)))"
+Example:
+\((:from . (\"vip@company.com\" ...))(:subject . (\"NOTICE\" ...)))"
   :type 'alist
   :group 'mu4e-goodies)
 
@@ -29,7 +29,7 @@ Example:
   :group 'mu4e-goodies)
 
 (defun mu4e-goodies-header-add-color (msg field val width)
-  "highlight specified keywords in header view"
+  "Highlight specified keywords in header view."
   (if (assoc field mu4e-goodies-special-field-keywords)
       (let* ((keywords (cdr (assoc field mu4e-goodies-special-field-keywords))))
         (cond ((stringp val)            ; may be a subject or something else
@@ -46,4 +46,4 @@ Example:
 
 (provide 'mu4e-goodies-header-color)
 
-;;; end of mu4e-goodies-header-color.el
+;;; mu4e-goodies-header-color.el ends here

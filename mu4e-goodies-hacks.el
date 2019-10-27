@@ -43,8 +43,7 @@
 ;; retained in a seperated window or frame.
 ;;
 (defun mu4e-goodies-detach-msg-view (&optional towin focusnew)  
-  "Detach the current mu4e-view buffer from header to a new
-frame or window.
+  "Detach the current mu4e-view buffer from header to a new frame or window.
 
 If towin is t, the detached message view will be presented in a
 splitted window. Otherwise it will be presented in a new frame.
@@ -92,7 +91,7 @@ If focusnew is t, the new window/frame will be focused"
 ;; Quickly save last query to mu4e-bookmarks and save to custom file
 ;;
 (defun mu4e-goodies-save-last-query-to-bookmarks (&optional notsave)
-  "Save last query to mu4e-bookmarks and save to custom file"
+  "Save last query to mu4e-bookmarks and save to custom file."
   (interactive "P")
   (when (> (length (mu4e-last-query)) 0)
     (let ((name "")
@@ -114,7 +113,7 @@ If focusnew is t, the new window/frame will be focused"
 ;; Quickly delete one email address in TO/CC/BCC fields
 ;;
 (defun mu4e-goodies-delete-address ()
-  "Quickly delete one email address in TO/CC/BCC fields"
+  "Quickly delete one email address in TO/CC/BCC fields."
   (interactive)
   (let ((addr-begin nil)
         (addr-end nil)
@@ -144,7 +143,7 @@ If focusnew is t, the new window/frame will be focused"
 
 (defun mu4e-goodies-wrapped-delete (orig-func)
   "When in address related fields, call mu4e-goodies-delete-address. 
-Otherwise call orig-func which is usually \\M-d"
+Otherwise call orig-func which is usually \\<\M-d>"
   (interactive)
   (let ((eoh ;; end-of-headers
         (save-excursion
@@ -257,4 +256,4 @@ like mu4e-shr2text"
 
 (provide 'mu4e-goodies-hacks)
 
-;;; end of mu4e-goodies-hacks.el
+;;; mu4e-goodies-hacks.el ends here

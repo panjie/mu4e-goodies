@@ -45,9 +45,10 @@
 ;; Quickly add/remove/search tag (named QT**) in header/message view
 ;;--------------------------------------------------
 (defvar mu4e-goodies~quick-tag "QT**"
-  "Quick tag")
+  "Quick tag.")
 
 (defun mu4e-goodies-add-del-quick-tag ()
+  "Quickly add/del tags."
   (interactive)
   (let* ((msg (mu4e-message-at-point))
          (oldtags (mu4e-message-field msg :tags)))
@@ -76,7 +77,7 @@
   "Add tags to header view's subject field like: [TAG] Subject..."
   (if (eq field :subject)
       (let ((tags (mu4e-message-field msg :tags)))
-        (if tags 
+        (if tags
             (setq val (concat
                        (mapconcat (function (lambda (x) (propertize (concat "[" x "]") 'face 'mu4e-goodies-face-tags)))
                                   tags "")
@@ -98,7 +99,7 @@
 
 ;;       ;; a hook should be here
 ;;       (if (mu4e-message-field msg :tags)
-;;           (progn 
+;;           (progn
 ;;             (setq val (concat (mapconcat (function (lambda (x) (propertize (concat "[" x "]") 'face 'mu4e-goodies-face-tags)))
 ;;                                          (mu4e-message-field msg :tags) "")
 ;;                               " "
@@ -129,4 +130,4 @@
 
 (provide 'mu4e-goodies-tags)
 
-;;; end of mu4e-goodies-tags.el
+;;; mu4e-goodies-tags.el ends here

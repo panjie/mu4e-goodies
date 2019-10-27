@@ -14,8 +14,8 @@
 
 ;;; Commentary:
 ;;
-;; [mu4e](https://github.com/djcb/mu) (mu for emacs)is a full-feature
-;; email client runs inside emacs. Here are some useful extensions/hacks
+;; [mu4e](https://github.com/djcb/mu) (mu for Emacs)is a full-feature
+;; email client runs inside Emacs. Here are some useful extensions/hacks
 ;; of mu4e.
 ;;
 ;; - Signature switch by rules
@@ -23,7 +23,7 @@
 ;; - Check automatically if you forget to add your attachments
 ;; - Interaction with Lync/SkypeFB (in office)
 ;; - Much convenient way to manipulate tags
-;; - Many useful hacks 
+;; - Many useful hacks
 
 ;;; Code:
 

@@ -31,4 +31,4 @@ the real email address"
 
 (provide 'mu4e-goodies-utils)
 
-;;; end of mu4e-goodies-utils.el
+;;; mu4e-goodies-utils.el ends here

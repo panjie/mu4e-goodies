@@ -43,7 +43,7 @@
 (add-to-list 'mailcap-mime-extensions '(".xlsx" . "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"))
 
 (defun mu4e-goodies-compose-with-attachments (&optional attachments)
-  "Compose a new message with attahments"
+  "Compose a new message with attahments."
   (mu4e-compose-new)
   (save-excursion
     (when attachments
@@ -58,4 +58,4 @@
 
 (provide 'mu4e-goodies-compose-with-attachments)
 
-;;; end of mu4e-goodies-compose-with-attachments.el
+;;; mu4e-goodies-compose-with-attachments.el ends here

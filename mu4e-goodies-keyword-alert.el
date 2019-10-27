@@ -37,7 +37,7 @@
 (require 'mu4e)
 (require 'hi-lock)
 
-(defvar mu4e-goodies-rule-func 
+(defvar mu4e-goodies-rule-func
   '((check-attach . mu4e-goodies-draft-attach-p)
     (check-cc . mu4e-goodies-draft-cc-p)))
 
@@ -46,16 +46,16 @@
     ("添付" . check-attach)
     ("附件" . check-attach))
   "Keywords to be alerted. An alist like:
-( (regexp-of-keywords . rules-for-keywords) ... )")
+\( (regexp-of-keywords . rules-for-keywords) ... )")
 
 (defun mu4e-goodies-draft-attach-p ()
-  "Check if current email draft has at least one attachment"
+  "Check if current email draft has at least one attachment."
   (save-excursion
     (goto-char (point-min))
     (re-search-forward "\<#part .*filename=.*" (point-max) t)))
 
 (defun mu4e-goodies-draft-cc-p ()
-  "Check if current email draft has cc field"
+  "Check if current email draft has cc field."
   (message-fetch-field "Cc"))
 
 (defun mu4e-goodies-search-body-subject (keyword &optional start)
@@ -81,7 +81,7 @@ the pos of the keyword which is a cons cell, nil if not found."
       nil)))
 
 
-(add-hook 'message-send-hook 
+(add-hook 'message-send-hook
           (defun mu4e-goodies-check-keywords ()
             (interactive "P")
             (let ((it (car mu4e-goodies-keywords))
@@ -106,4 +106,4 @@ the pos of the keyword which is a cons cell, nil if not found."
 
 (provide 'mu4e-goodies-keyword-alert)
 
-;;; end of mu4e-goodies-keyword-alert
+;;; mu4e-goodies-keyword-alert.el ends here

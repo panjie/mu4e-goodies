@@ -21,12 +21,10 @@
 (defun mu4e-goodies-lync-chat (&optional emails)
   "Lync with the email address at point if parameter email is not given.
 
-Note:
-- It will only work under windows/cygwin/macOS
-- If used under cygwin, you should prepare a script named \"lya.bat\" like the following:
-  -----------------------------------------
-  @echo off
-  setlocal enableDelayedExpansion
+Note: - It will only work under windows/cygwin/macOS - If used
+under cygwin, you should prepare a script named \"lya.bat\" like
+the following: ----------------------------------------- @echo
+off setlocal enableDelayedExpansion
 
   set SIPS=
   :LOOP
@@ -94,4 +92,4 @@ Note:
 
 (provide 'mu4e-goodies-lync)
 
-;;; end of mu4e-goodies-lync.el
+;;; mu4e-goodies-lync.el ends here

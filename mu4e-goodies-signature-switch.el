@@ -21,14 +21,14 @@
 
 (defcustom mu4e-goodies-signatures nil
   "List of signatures used by mu4e-goodies-signature-switch, which is an alist like:
-((signame . \"XXX/xxx@gmail.com\")  (signame . \"YYY/yyy@yahoo.com\"))"
+\((signame . \"XXX/xxx@gmail.com\")  (signame . \"YYY/yyy@yahoo.com\"))"
   :type '(list (cons symbol string))
   :group 'mu4e-goodies)
 
 
 (defcustom mu4e-goodies-signature-switch-rules nil
   "Rules of signature swith, which is an alist like:
-((\"regexp-to-match-address\" . signame) ...)
+\((\"regexp-to-match-address\" . signame) ...)
 The rules will only apply to the first recipient's address"
   :type '(list (cons string symbol))
   :group 'mu4e-goodies)
@@ -71,7 +71,7 @@ if signame is not given"
 
 (defun mu4e-goodies-switch-signature-by-rule ()
   "Switch the draft's signature according to the rules defined in
-  mu4e-goodies-signature-switch-rules"
+mu4e-goodies-signature-switch-rules"
   (when mu4e-goodies-signature-switch-rules
     (let ((addr (if mu4e-compose-parent-message
                          (mu4e-message-field mu4e-compose-parent-message :from)
@@ -94,4 +94,4 @@ if signame is not given"
 
 (provide 'mu4e-goodies-signature-switch)
 
-;; end of mu4e-goodies-signature-switch.el
+;;; mu4e-goodies-signature-switch.el ends here
