@@ -1,16 +1,24 @@
-;; Copyright (C) 2014  Pan Jie (panjie@gmail.com)
+;;; mu4e-goodies-hacks.el --- Useful hacks for mu4e
 
-;; Licensed under the Apache License, Version 2.0 (the "License");
-;; you may not use this file except in compliance with the License.
-;; You may obtain a copy of the License at
+;; Copyright (C) 2014-2019  Pan Jie
 
-;;     http://www.apache.org/licenses/LICENSE-2.0
+;; Author: Pan Jie <panjie@gmail.com>
+;; Created: 2014-10-8
+;; Version: 1.0
+;; Package-Requires: ((emacs "25.1"))
+;; Keywords: email tools
+;; URL: https://github.com/panjie/mu4e-goodies
+;; License: https://github.com/panjie/mu4e-goodies/LICENSE
 
-;; Unless required by applicable law or agreed to in writing, software
-;; distributed under the License is distributed on an "AS IS" BASIS,
-;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-;; See the License for the specific language governing permissions and
-;; limitations under the License.
+;; This file is not a part of GNU Emacs.
+
+;;; Commentary:
+
+;; Usefuly hacks for mu4e
+
+;;; Code:
+
+
 
 (require 'mu4e)
 
@@ -248,3 +256,5 @@ like mu4e-shr2text"
 (setq mu4e-query-rewrite-function 'mu4e-goodies~break-cjk-query)
 
 (provide 'mu4e-goodies-hacks)
+
+;;; end of mu4e-goodies-hacks.el
