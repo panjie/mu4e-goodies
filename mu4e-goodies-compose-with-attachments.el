@@ -1,4 +1,4 @@
-;;; mu4e-goodies-compose-with-attachments.el --- Provide helper functions to create shortcuts in Finder/Explorer to send files using mu4e
+;;; mu4e-goodies-compose-with-attachments.el --- Provide helper functions to create shortcuts in Finder/Explorer to send files using mu4e -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014-2019  Pan Jie
 

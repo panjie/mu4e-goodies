@@ -1,4 +1,4 @@
-;;; mu4e-goodies-signature-switch.el --- Switch signatures
+;;; mu4e-goodies-signature-switch.el --- Switch signatures -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014-2019  Pan Jie
 

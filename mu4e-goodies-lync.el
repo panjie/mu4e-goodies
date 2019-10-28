@@ -1,4 +1,4 @@
-;;; mu4e-goodies-lync.el --- Provide useful functions to interact with Lync/SkypeFB
+;;; mu4e-goodies-lync.el --- Provide useful functions to interact with Lync/SkypeFB  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014-2019  Pan Jie
 

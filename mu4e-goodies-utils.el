@@ -1,4 +1,4 @@
-;;; mu4e-goodies-utils.el --- Some common functions
+;;; mu4e-goodies-utils.el --- Some common functions  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014-2019  Pan Jie
 

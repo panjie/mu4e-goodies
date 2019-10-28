@@ -1,4 +1,4 @@
-;;; mu4e-goodies-keyword-alert.el --- Alert of keywords under certain context
+;;; mu4e-goodies-keyword-alert.el --- Alert of keywords under certain context  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014-2019  Pan Jie
 

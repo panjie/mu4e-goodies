@@ -1,4 +1,4 @@
-;;; mu4e-goodies-tags.el --- Provide useful functions to use tags in mu4e
+;;; mu4e-goodies-tags.el --- Provide useful functions to use tags in mu4e  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014-2019  Pan Jie
 

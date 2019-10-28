@@ -1,4 +1,4 @@
-;;; mu4e-goodies-actions.el --- Useful actions for mu4e
+;;; mu4e-goodies-actions.el --- Useful actions for mu4e  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014-2019  Pan Jie
 

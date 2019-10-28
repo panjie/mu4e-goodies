@@ -1,4 +1,4 @@
-;;; mu4e-goodies-header-color.el --- highlight specified keywords in header view
+;;; mu4e-goodies-header-color.el --- highlight specified keywords in header view  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014-2019  Pan Jie
 
