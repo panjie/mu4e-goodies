@@ -82,13 +82,12 @@ off setlocal enableDelayedExpansion
       (dolist (elt (mu4e-message-field msg :to))
         (push (cdr elt) recipients))
       (dolist (elt (mu4e-message-field msg :cc))
-        (add-to-list 'recipients (cdr elt)))
+        (push (cdr elt) recipients))
       (mu4e-goodies-lync-chat recipients)))
 
   ;; define 'L' as the shortcut
   (add-to-list 'mu4e-view-actions
-               '("Lync with all" . mu4e-msgv-action-lync-with-all) t)
-  )
+               '("Lync with all" . mu4e-msgv-action-lync-with-all) t))
 
 (provide 'mu4e-goodies-lync)
 
