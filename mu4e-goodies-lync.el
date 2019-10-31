@@ -78,9 +78,9 @@ off setlocal enableDelayedExpansion
     
     (let ((recipients '()))
       (dolist (elt (mu4e-message-field msg :from))
-        (add-to-list 'recipients (cdr elt)))
+        (push (cdr elt) recipients))
       (dolist (elt (mu4e-message-field msg :to))
-        (add-to-list 'recipients (cdr elt)))
+        (push (cdr elt) recipients))
       (dolist (elt (mu4e-message-field msg :cc))
         (add-to-list 'recipients (cdr elt)))
       (mu4e-goodies-lync-chat recipients)))

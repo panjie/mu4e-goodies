@@ -57,7 +57,6 @@ If focusnew is t, the new window/frame will be focused"
     (when (string= (buffer-name buf) mu4e~view-buffer-name)
       ;; rename it so that it will not be found by mu4e-view
       (rename-buffer (concat "*mu4e-view*" (mu4e-msg-field (mu4e-message-at-point t) :subject) "*") t)
-      (setq mu4e~view-buffer nil)
       (if towin
           (setq new-win (split-window-below))
         (progn
@@ -116,8 +115,7 @@ If focusnew is t, the new window/frame will be focused"
   "Quickly delete one email address in TO/CC/BCC fields."
   (interactive)
   (let ((addr-begin nil)
-        (addr-end nil)
-        (pos-temp nil))
+        (addr-end nil))
     ;; Search for the beginning of the addresses, which maybe like:
     ;; - "XXX, YYY/ZZZ" <abc@def.com>
     ;; - abc@def.com

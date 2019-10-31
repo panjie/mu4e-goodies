@@ -65,14 +65,17 @@
 ;; Create a todo entry in the specified subtree of specified org file
 (defcustom mu4e-goodies-org-file nil
   "Default org file where the mail-based todo/meeting will be inserted."
+  :type 'file
   :group 'mu4e-goodies)
 
 (defcustom mu4e-goodies-todo-parent-entry nil
   "The default subtree entry where the mail-based todo item will be inserted."
+  :type 'string
   :group 'mu4e-goodies)
 
 (defcustom mu4e-goodies-meeting-parent-entry nil
   "The default subtree entry where the mail-based meeting item will be inserted."
+  :type 'string
   :group 'mu4e-goodies)
 
 (defvar mu4e-goodies-recent-org-file nil
@@ -89,8 +92,7 @@
 the subtree of file's entry with the content."
   (with-temp-file file
     (org-mode)
-    (let ((buf (current-buffer))
-          entry-marker)
+    (let (entry-marker)
       ;; load the content of file into temp buffer
       (goto-char (point-min))
       (insert-file-contents file)
@@ -122,7 +124,7 @@ the subtree of file's entry with the content."
   (interactive)
   (let ((title item-title)
         (link item-link)
-        file entry body ts)
+        file entry ts)
     (setq title (read-string (format "%s title: " (if istodo "Task" "Meeting"))
                              title))
     (unless (setq file (or mu4e-goodies-org-file mu4e-goodies-recent-org-file))
