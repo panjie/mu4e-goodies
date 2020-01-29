@@ -34,6 +34,7 @@
 ;;; Code:
 
 (require 'mu4e-utils)
+(require 'mailcap)
 
 ;; add the most common office file's mime types to mailcap-mime-extensions
 (add-to-list 'mailcap-mime-extensions '(".docx" . "application/vnd.openxmlformats-officedocument.wordprocessingml.document"))
