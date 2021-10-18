@@ -8,7 +8,6 @@ extensions/hacks of mu4e.
 - Signature switch by rules
 - Highlight the VIP's mails
 - Check automatically if you forget to add your attachments
-- Interaction with Lync/SkypeFB (in office)
 - Much convenient way to manipulate tags
 - Helper function for create shortcut to send files using `mu4e` in
   Finder/Explorer
@@ -101,25 +100,6 @@ make it work.
 (setq mu4e-goodies-special-field-keywords '((:from . ("vip1@xxx.com" "vip2@xxx.com" ...))
                                             (:subject . ("regexp_for_keyword" ...))))
 ```
-
-mu4e-goodies-lync
------------------
-
-This extension let you open lync/skypeFB chat window directly from mu4e.
-Note that because it's is implemented only by open URI like
-`sip:xxx@yyy.com`, so technically the registed application for `sip`
-will be opened(which on Windows will usually be Lync).
-
-Lync/SkypeFB with the sender or any contacts in the email:
-
-1. Move cursor to any contacts in message view, and press `L` to open
-   Lync chat window with the contact
-2. Or, press `L` in message body of `mu4e:view` mode will open a chat
-   window with the sender.
-3. Or, use the action `Lync with all` to Lync/SkypeFB with all contacts
-   in the current email. This is bound to `L` in message view.(Windows
-   only)
-
 
 
 mu4e-goodies-compose-with-attachments
