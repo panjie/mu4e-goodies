@@ -29,6 +29,23 @@ the real email address"
     (if (stringp addr)   ;; raw address like: "ABC <abc@abc.com>"
         (car (mail-header-parse-address addr)))))
 
+
+(defvar mu4e-goodies~header-handlers nil
+  "Internal handlers of header view for mu >= 1.5")
+
+
+(defun mu4e-goodies~header-advice (orig-func &rest args)
+  "General advice for plugins for header view"
+  (let* ((str (apply orig-func args))
+         (msg (car args))
+         (field (cadr args)))
+    (dolist (func mu4e-goodies~header-handlers)
+      (setq str (funcall func msg field (mu4e-message-field msg field) str)))
+    str))
+
+(when (functionp 'mu4e~headers-field-value) ; mu >= 1.5
+  (advice-add 'mu4e~headers-field-value :around #'mu4e-goodies~header-advice))
+
 (provide 'mu4e-goodies-utils)
 
 ;;; mu4e-goodies-utils.el ends here
