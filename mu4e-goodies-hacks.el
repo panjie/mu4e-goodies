@@ -68,8 +68,8 @@ If focusnew is t, the new window/frame will be focused"
             (select-window new-win)
           (select-frame-set-input-focus new-frm))))))
 
-(define-key 'mu4e-view-mode-map "\'" 'mu4e-goodies-detach-msg-view)
-(define-key 'mu4e-view-mode-map "\"" (lambda () (interactive) (mu4e-goodies-detach-msg-view t nil)))
+(define-key mu4e-view-mode-map "\'" 'mu4e-goodies-detach-msg-view)
+(define-key mu4e-view-mode-map "\"" (lambda () (interactive) (mu4e-goodies-detach-msg-view t nil)))
 
 ;;
 ;; Always put attachments to the bottom of email
