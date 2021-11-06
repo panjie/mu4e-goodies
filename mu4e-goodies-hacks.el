@@ -106,7 +106,7 @@ If focusnew is t, the new window/frame will be focused"
         (mu4e-message "Saving bookmark %s..." name)
         (customize-save-variable 'mu4e-bookmarks mu4e-bookmarks)))))
 
-(define-key 'mu4e-headers-mode-map "K" 'mu4e-goodies-save-last-query-to-bookmarks)
+(define-key mu4e-headers-mode-map "K" 'mu4e-goodies-save-last-query-to-bookmarks)
 
 ;;
 ;; Quickly delete one email address in TO/CC/BCC fields
@@ -211,8 +211,9 @@ like mu4e-shr2text"
         (buffer-string))
     body))
 
-(add-to-list 'mu4e-message-body-rewrite-functions
-             'mu4e-goodies-message-delete-html-extra-blanklines)
+(when (boundp 'mu4e-message-body-rewrite-functions)
+  (add-to-list 'mu4e-message-body-rewrite-functions
+               'mu4e-goodies-message-delete-html-extra-blanklines))
 
 ;;
 ;; Xapian, the search engine of mu has a poor support of CJK characters,

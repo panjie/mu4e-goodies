@@ -33,7 +33,6 @@
 ;;
 ;;; Code:
 
-(require 'mu4e-utils)
 (require 'mailcap)
 
 ;; add the most common office file's mime types to mailcap-mime-extensions
